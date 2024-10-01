@@ -1,10 +1,16 @@
 <?php
 
 use App\Http\Controllers\Administrator;
+use App\Http\Controllers\daftarBalitaController;
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\FoodRecallController;
 use App\Http\Controllers\UsersList;
+use App\Models\daftarBalita;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,26 +23,47 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+route::get("/login", function () {
+    return view("auth.login");
+})->name("loginPage");
+route::post("/login", function (Request $request) {
 
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified',
-// ])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     })->name('dashboard');
-// });
+    $getuser = User::where([
+        ["email", $request->email],
+        ["password", $request->password]
+    ])->first();
+    if ($getuser) {
+        # code...
+        Auth::login($getuser, $request->remember);
+        return redirect()->route("home");
+    } else {
+        return back()->withErrors(["User Tidak ditemukan"]);
+    }
+})->name("loginPagecheck");
 
 
-Route::get('/', [Dashboard::class, 'index'])->name('home');
-Route::get('/SurveyList', [Dashboard::class, 'survey'])->name('survey');
-Route::resource('/users', UsersList::class);
-Route::prefix("/admin")->group(
+Route::get('/', [Dashboard::class, 'index'])->name('home')->middleware("auth");
+Route::get('/SurveyList', [Dashboard::class, 'survey'])->name('survey')->middleware("auth");
+Route::resource('/respondent', UsersList::class)->middleware("auth");
+Route::resource('/foodRecall', FoodRecallController::class)->middleware("auth");
+Route::get('/foodRecallCetak{daftarBalita}', function (daftarBalita $daftarBalita) {
+    return view("foodRecallCetak", [
+        "pageTitle" => "Food Recal Report | $daftarBalita->namaBalita ( $daftarBalita->namaIbu )",
+        "daftarBalita" => $daftarBalita
+    ]);
+})->name("foodRecallCetak")->middleware("auth");
+Route::resource('/daftarBalita', daftarBalitaController::class)->middleware("auth");
+Route::prefix("/admin")->middleware("auth")->group(
     function () {
         Route::resource('server', Administrator::class)->names("Administrator");
+        Route::get("logout", function (Request $request) {
+            Auth::logout();
+
+            $request->session()->invalidate();
+
+            $request->session()->regenerateToken();
+
+            return redirect('/');
+        })->name("logout");
     }
 );

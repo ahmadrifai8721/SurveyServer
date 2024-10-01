@@ -1,7 +1,7 @@
 <!-- ========== Topbar Start ========== -->
 <div class="navbar-custom">
     <div class="topbar container-fluid">
-        <div class="d-flex align-items-center gap-lg-2 gap-1">
+        <div class="gap-1 d-flex align-items-center gap-lg-2">
 
             <!-- Topbar Brand Logo -->
             <div class="logo-topbar">
@@ -42,7 +42,7 @@
 
         </div>
 
-        <ul class="topbar-menu d-flex align-items-center gap-3">
+        <ul class="gap-3 topbar-menu d-flex align-items-center">
 
             <li class="d-none d-sm-inline-block">
                 <a class="nav-link" data-bs-toggle="offcanvas" href="#theme-settings-offcanvas">
@@ -65,21 +65,21 @@
             </li>
 
             <li class="dropdown">
-                <a class="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown" href="#"
+                <a class="px-2 nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#"
                     role="button" aria-haspopup="false" aria-expanded="false">
                     <span class="account-user-avatar">
                         <img src="{{ url('/') }}/assets/images/users/avatar-1.jpg" alt="user-image" width="32"
                             class="rounded-circle">
                     </span>
-                    <span class="d-lg-flex flex-column gap-1 d-none">
-                        <h5 class="my-0">Administrator</h5>
+                    <span class="gap-1 d-lg-flex flex-column d-none">
+                        <h5 class="my-0">{{ Auth::user()->name }}</h5>
                         {{-- <h6 class="my-0 fw-normal">Founder</h6> --}}
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
                     <!-- item-->
                     <div class=" dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">Welcome !</h6>
+                        <h6 class="m-0 text-overflow">Welcome !</h6>
                     </div>
                     {{--
                     <!-- item-->
@@ -105,12 +105,13 @@
                         <i class="mdi mdi-lock-outline me-1"></i>
                         <span>Lock Screen</span>
                     </a>
+                    --}}
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
+                    <a href="{{ route('logout') }}" class="dropdown-item">
                         <i class="mdi mdi-logout me-1"></i>
                         <span>Logout</span>
-                    </a> --}}
+                    </a>
                 </div>
             </li>
         </ul>

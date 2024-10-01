@@ -1,8 +1,12 @@
 <?php
 
+use App\Models\daftarBalita;
+use App\Models\foodRecall;
 use App\Models\Respondent;
 use App\Models\Survey;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +32,16 @@ Route::post(
     }
 );
 Route::post(
+    "/login",
+    function (Request $request) {
+        $send = User::where([
+            ["email", $request->email],
+            ["password", $request->password]
+        ])->first();
+        return response()->json([$send]);
+    }
+);
+Route::post(
     "/isi/{respondent_id}",
     function (String $respondent_id, Request $request) {
         $dataPost = $request->all();
@@ -35,5 +49,21 @@ Route::post(
         $send = Survey::create($dataPost);
         $send["status"] = true;
         return response()->json([$send]);
+    }
+);
+
+Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
+    function () {
+
+        route::get("/getBalita", function () {
+            return response()->json([daftarBalita::all()]);
+        });
+        route::post("/new", function (Request $request) {
+            $data = $request->input();
+            unset($data["uuid"]);
+            $data["users_id"] = $request->uuid;
+            $send = foodRecall::create($data);
+            return response()->json([$send]);
+        });
     }
 );

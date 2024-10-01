@@ -39,7 +39,7 @@
             <a href="pages-profile.html">
                 <img src="{{ url('/') }}/assets/images/users/avatar-1.jpg" alt="user-image" height="42"
                     class="shadow-sm rounded-circle">
-                <span class="mt-2 leftbar-user-name">Admi</span>
+                <span class="mt-2 leftbar-user-name">Admin</span>
             </a>
         </div> --}}
 
@@ -61,17 +61,36 @@
             </li>
 
             <li class="side-nav-item">
-                <a href="{{ route('users.index') }}" class="side-nav-link">
+                <a href="{{ route('respondent.index') }}" class="side-nav-link">
                     <i class="uil-users-alt"></i>
                     <span> Daftar Responden </span>
                 </a>
             </li>
-            {{-- <li class="side-nav-item">
+
+            <li class="side-nav-item">
+                <a data-bs-toggle="collapse" href="#sidebarForms" aria-expanded="false" aria-controls="sidebarForms"
+                    class="side-nav-link">
+                    <i class="mdi mdi-food-variant"></i>
+                    <span> Food Recal</span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" id="sidebarForms">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a href="{{ route('foodRecall.index') }}"> Food Recal Report</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('daftarBalita.index') }}">Daftar Balita</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="side-nav-item">
                 <a href="{{ route('Administrator.index') }}" class="side-nav-link">
                     <i class="uil-users-alt"></i>
                     <span> Administrator </span>
                 </a>
-            </li> --}}
+            </li>
 
             {{-- <li class="side-nav-title">Apps</li>
 
@@ -93,7 +112,8 @@
                 <a href="javascript: void(0);" class="text-white float-end close-btn">
                     <i class="mdi mdi-close"></i>
                 </a>
-                <img src="{{ url('/') }}/assets/images/svg/help-icon.svg" height="90" alt="Helper Icon Image" />
+                <img src="{{ url('/') }}/assets/images/svg/help-icon.svg" height="90"
+                    alt="Helper Icon Image" />
                 <h5 class="mt-3">Kiss Bunda</h5>
                 <p class="mb-3">Dashboard Survey Kepuasan Kiss Bunda</p>
             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Unique;
 
 class Administrator extends Controller
 {
@@ -37,7 +38,7 @@ class Administrator extends Controller
 
         $request->validate([
             'name' => "required",
-            "email" => 'required|email:rcf,dns',
+            "email" => 'required|email:rcf,dns|unique:users,email_address',
             "password" => 'required|min:8|max:16|alpha_num'
         ]);
 
