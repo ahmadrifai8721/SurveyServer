@@ -6,8 +6,10 @@ use App\Models\Respondent;
 use App\Models\Survey;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +41,34 @@ Route::post(
             ["password", $request->password]
         ])->first();
         return response()->json([$send]);
+    }
+);
+Route::post(
+    "/adminRegister",
+    function (Request $request) {
+        $validator = Validator::make($request->input(), [
+            'name' => "required",
+            "email" => 'required|email:rcf,dns|unique:users,email',
+            "password" => 'required|min:8|max:16|alpha_num'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors(),
+                'status' => Response::HTTP_BAD_REQUEST,
+            ], Response::HTTP_BAD_REQUEST);
+        } else {
+
+            $data = $request->input();
+            $data["uuid"] = Str::uuid();
+
+            $add = User::create($data);
+            if ($add) {
+                return response()->json([$add], 200);
+            } else {
+                return response()->json(["AUTH" => "Gagal Registrasi"], 403);
+            }
+        }
     }
 );
 Route::post(
