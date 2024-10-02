@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('food_recalls', function (Blueprint $table) {
             $table->id();
             $table->string("users_id");
-            $table->foreignId("daftar_balita_id")->constrained("daftar_balitas")->cascadeOnDelete();
+            $table->foreignId("daftar_balita_id");
             $table->string("waktu");
             $table->string("namaMasakan");
             $table->string("jenis");

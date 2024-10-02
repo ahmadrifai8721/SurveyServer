@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\daftarBalita;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class balitaImport implements ToModel
+class balitaImport implements ToModel, WithStartRow
 {
     /**
      * @param array $row
@@ -20,5 +21,9 @@ class balitaImport implements ToModel
             'namaIbu' => $row[2],
             'alamat' => $row[3],
         ]);
+    }
+    public function startRow(): int
+    {
+        return 2;
     }
 }

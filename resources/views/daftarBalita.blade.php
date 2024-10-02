@@ -21,12 +21,18 @@
         </div>
         <!-- end page title -->
         <!-- Button trigger modal -->
-        <button type="button" class="mb-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahbalita">
-            <i class="mdi mdi-account-plus-outline"></i> Tambah Balita
-        </button>
-        <button type="button" class="mb-2 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#Importbalita">
-            <i class="mdi mdi-account-plus-outline"></i> Import From Excel
-        </button>
+        <form action="{{ route('clearBalita') }}" method="post">
+            <button type="button" class="mb-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahbalita">
+                <i class="mdi mdi-account-plus-outline"></i> Tambah Balita
+            </button>
+            <button type="button" class="mb-2 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#Importbalita">
+                <i class="mdi mdi-account-plus-outline"></i> Import From Excel
+            </button>
+            @csrf
+            <button class="mb-2 btn btn-danger" type="submit">
+                <i class="mdi mdi-trash"></i> Hapus Daftar Balita
+            </button>
+        </form>
 
         <!-- Modal tambah -->
         <div class="modal fade" id="tambahbalita" tabindex="-1" aria-labelledby="tambahbalitaLabel" aria-hidden="true">
@@ -71,13 +77,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('daftarBalita.store') }}" method="POST"
-                            enctype="multipart/form-data">
+                        <form action="{{ route('daftarBalita.store') }}" method="POST" enctype="multipart/form-data">
 
                             @csrf
-                            <a href="{{ url('/assets/tempImportBalita.xlsx') }}"
-                            class="mb-2 btn btn-secondary">
-                            <i class="mdi mdi-microsoft-excel"></i> Download Template
+                            <a href="{{ url('/assets/tempImportBalita.xlsx') }}" class="mb-2 btn btn-secondary">
+                                <i class="mdi mdi-microsoft-excel"></i> Download Template
                             </a>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Upload File</label>
@@ -99,13 +103,13 @@
                         <h4 class="header-title">Daftar balita</h4>
                         <div class="tab-content">
                             <div class="tab-pane show active" id="fixed-header-preview">
-                                <table id="fixed-header-datatable" class="table table-striped dt-responsive nowrap w-100">
+                                <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
                                     <thead>
                                         <tr class="text-capitalize">
                                             <th>Nama balita</th>
                                             <th>Nama Ibu</th>
                                             <th>Alamat</th>
-                                            <th>Actions</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -115,19 +119,7 @@
                                                 <td>{{ $item->namaBalita }}</td>
                                                 <td>{{ $item->namaIbu }}</td>
                                                 <td>{{ $item->alamat }}</td>
-                                                <td>
-                                                    <a href="{{ route('daftarBalita.show', $item->id) }}">
-                                                        <span class="badge badge-lg rounded-pill text-bg-primary">
-                                                            <i class="mdi mdi-account"></i>
-                                                        </span>
-                                                    </a>
-                                                    <span class="badge badge-lg rounded-pill text-bg-warning">
-                                                        <i class="mdi mdi-account-edit"></i>
-                                                    </span>
-                                                    <span class="badge badge-lg rounded-pill text-bg-danger">
-                                                        <i class="mdi mdi-account-remove"></i>
-                                                    </span>
-                                                </td>
+
                                             </tr>
                                         @empty
                                             <tr>
@@ -140,7 +132,7 @@
                                             <th>Nama balita</th>
                                             <th>Nama Ibu</th>
                                             <th>Alamat</th>
-                                            <th>Actions</th>
+
                                         </tr>
                                     </tfoot>
                                 </table>

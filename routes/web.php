@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,14 @@ Route::get('/foodRecallCetak{daftarBalita}', function (daftarBalita $daftarBalit
     ]);
 })->name("foodRecallCetak")->middleware("auth");
 Route::resource('/daftarBalita', daftarBalitaController::class)->middleware("auth");
+Route::post('/clearBalita', function () {
+    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+    daftarBalita::truncate();
+    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+    return back()->with("success", "Daftar Balita Berhasil di hapus");
+})
+    ->name("clearBalita")
+    ->middleware("auth");
 Route::prefix("/admin")->middleware("auth")->group(
     function () {
         Route::resource('server', Administrator::class)->names("Administrator");
