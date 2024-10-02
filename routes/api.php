@@ -86,7 +86,11 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
     function () {
 
         route::get("/getBalita", function () {
-            return response()->json(daftarBalita::all(["namaBalita"]));
+            $send = [];
+            foreach (daftarBalita::all() as $key => $value) {
+                $send[] = $value->namaBalita . "( $value->namaIbu )";
+            }
+            return response()->json([$send]);
         });
         route::post("/new", function (Request $request) {
             $data = $request->input();
