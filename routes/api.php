@@ -100,12 +100,15 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
             $send = foodRecall::create($data);
             return response()->json([$send]);
         });
-        route::post("/", function (Request $request) {
-            $data = foodRecall::all();
-           foreach ($data as $key => $value) {
-                $send = $value;
-           }
-            return response()->json([$send]);
+        route::get("/", function (Request $request) {
+
+            $send
+                = foodRecall::whereHas('penyuluh')
+                ->whereHas('daftarBalita')
+                ->with('penyuluh')->with('daftarBalita')
+                ->get();
+
+            return response()->json($send);
         });
     }
 );
