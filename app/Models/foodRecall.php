@@ -12,6 +12,13 @@ class foodRecall extends Model
 
     protected $guarded = ["id"];
 
+    protected $hidden = [
+        "id",
+        "users_id",
+        "daftar_balita_id"
+    ];
+
+
     public function daftarBalita(): HasOne
     {
         return $this->hasOne(daftarBalita::class, "id", "daftar_balita_id");
