@@ -93,8 +93,17 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
             }
             return response()->json([$send]);
         });
-        route::post("/new", function (Request $request) {
+        route::get("/new", function (Request $request) {
             $data = $request->input();
+            $balita = explode("(", $request->daftar_balita_id);
+            $namaBalita = $balita[0];
+            $namaIbu = explode(")", $balita[1])[0];
+            $namaIbu = trim($namaIbu);
+            // return $namaIbu;
+            $data["daftar_balita_id"] =
+            daftarBalita::where("namaBalita", $namaBalita)
+            ->where("namaIbu", $namaIbu)
+                ->get("id")[0]["id"];
             unset($data["uuid"]);
             $data["users_id"] = $request->uuid;
             $send = foodRecall::create($data);
