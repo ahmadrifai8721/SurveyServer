@@ -101,7 +101,10 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
             return response()->json([$send]);
         });
         route::post("/", function (Request $request) {
-            $send = foodRecall::all();
+            $data = foodRecall::all();
+           foreach ($data as $key => $value) {
+                $send = $value;
+           }
             return response()->json([$send]);
         });
     }
