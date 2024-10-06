@@ -1,4 +1,4 @@
-@extends('layout/mainandro')
+@extends('layout/mainAndro')
 @section('content')
     <table id="fixed-header-datatable" class="table table-bordered dt-responsive nowrap w-100 text-capitalize">
         <h4 class="m-2">Nama Balita : {{ $daftarBalita->namaBalita }}</h4>
