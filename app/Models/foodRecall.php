@@ -15,7 +15,8 @@ class foodRecall extends Model
     protected $hidden = [
         "id",
         "users_id",
-        "daftar_balita_id"
+        "daftar_balita_id",
+        "created_at"
     ];
 
 
