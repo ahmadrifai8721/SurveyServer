@@ -104,7 +104,7 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
 
             return view("foodRecallAndro", [
                 "pageTitle" => "Food Recal Report",
-                "foodRecall" => foodRecall::all()
+                "foodRecall" => foodRecall::where("uuid", $request->uuid)
             ]);
         });
         route::get("/cetak{daftarBalita}", function (daftarBalita $daftarBalita, Request $request) {
