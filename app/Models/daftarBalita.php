@@ -12,6 +12,11 @@ class daftarBalita extends Model
 
     protected $guarded = ['id'];
 
+
+    protected $hidden = [
+        "alamat"
+    ];
+
     public function foodRecall(): HasMany
     {
         return $this->hasMany(foodRecall::class, "daftar_balita_id", "id");
