@@ -38,9 +38,10 @@ class foodRecallController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(foodRecall $foodRecall)
+    public function show(foodRecall $foodRecall, Request $request)
     {
         //
+
     }
 
     /**

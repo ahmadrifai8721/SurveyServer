@@ -102,13 +102,10 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
         });
         route::get("/", function (Request $request) {
 
-            $send
-                = foodRecall::whereHas('penyuluh')
-                ->whereHas('daftarBalita')
-                ->with('penyuluh')->with('daftarBalita')
-                ->get();
-
-            return response()->json($send);
+            return view("foodRecallAndro", [
+                "pageTitle" => "Food Recal Report",
+                "foodRecall" => foodRecall::all()
+            ]);
         });
     }
 );
