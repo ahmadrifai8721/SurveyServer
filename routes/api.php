@@ -42,12 +42,12 @@ Route::post(
         ])
             ->withOnly('posyandu')
             ->first();
-        $send = [
-            "uuid" => $send->uuid,
-            "name" => $send->name,
-            "namaPosyandu" => $send->posyandu_id == null ? "Admin Posyandu" : $send->posyandu->nama,
-            "created_at" => $send->posyandu->created_at,
-        ];
+        // $send = [
+        //     "uuid" => $send->uuid,
+        //     "name" => $send->name,
+        //     "namaPosyandu" => $send->posyandu_id == null ? "Admin Posyandu" : $send->posyandu->nama,
+        //     "created_at" => $send->posyandu->created_at,
+        // ];
         return response()->json([$send]);
     }
 );
