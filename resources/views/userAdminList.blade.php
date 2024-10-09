@@ -246,7 +246,7 @@
                                                                 <div class="mb-3 form-floating">
                                                                     <select name="posyandu_id" id="posyandu"
                                                                         class="form-select">
-                                                                        <option value="null"
+                                                                        <option value="0"
                                                                             {{ $item->posyandu_id == null ? 'selected' : '' }}>
                                                                             Posyandu Belum Di Pilih</option>
                                                                         @forelse ($posyandu as $posyanduList)
