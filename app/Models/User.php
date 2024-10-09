@@ -29,6 +29,7 @@ class User extends Authenticatable
         'uuid',
         'password',
         'posyandu_id',
+        'created_at',
     ];
 
     /**
