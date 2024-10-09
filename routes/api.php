@@ -128,7 +128,8 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
 
             return view("foodRecallCetakAndro", [
                 "pageTitle" => "Food Recal Report",
-                "daftarBalita" => $daftarBalita
+                "daftarBalita" => $daftarBalita,
+                "uuid" => $request->uuid
             ]);
         })->name("foodRecallCetakAndro");
     }
