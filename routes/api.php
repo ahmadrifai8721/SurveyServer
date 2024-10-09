@@ -39,7 +39,14 @@ Route::post(
         $send = User::where([
             ["email", $request->email],
             ["password", $request->password]
-        ])->first();
+        ])
+            ->withOnly('posyandu')
+            ->first();
+        $send = [
+            "uuid" => $send->uuid,
+            "name" => $send->name,
+            "namaPosyandu" => $send->posyandu->nama,
+        ];
         return response()->json([$send]);
     }
 );
