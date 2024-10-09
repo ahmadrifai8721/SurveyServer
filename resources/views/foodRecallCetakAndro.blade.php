@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($daftarBalita->foodRecall->where('user_id', $uuid) as $data)
+            @foreach ($daftarBalita->foodRecall->where('user_id', $uuid)->get() as $data)
                 <tr>
                     <td>{{ $data->waktu }}</td>
                     <td>{{ $data->namaMasakan }}</td>
