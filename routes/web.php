@@ -4,6 +4,7 @@ use App\Http\Controllers\Administrator;
 use App\Http\Controllers\daftarBalitaController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\FoodRecallController;
+use App\Http\Controllers\posyanduController;
 use App\Http\Controllers\UsersList;
 use App\Models\daftarBalita;
 use App\Models\User;
@@ -65,6 +66,7 @@ Route::post('/clearBalita', function () {
 Route::prefix("/admin")->middleware("auth")->group(
     function () {
         Route::resource('server', Administrator::class)->names("Administrator");
+        Route::resource('posyandu', posyanduController::class);
         Route::get("logout", function (Request $request) {
             Auth::logout();
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\posyandu;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -17,7 +18,8 @@ class Administrator extends Controller
         //
         return view("userAdminList", [
             "pageTitle" => "User List",
-            "admin" => User::all()
+            "admin" => User::all(),
+            "posyandu" => posyandu::all()
         ]);
     }
 
@@ -39,7 +41,8 @@ class Administrator extends Controller
         $request->validate([
             'name' => "required",
             "email" => 'required|email:rcf,dns|unique:users,email',
-            "password" => 'required|min:8|max:16|alpha_num'
+            "password" => 'required|min:8|max:16|alpha_num',
+            'posyandu_id' => "required",
         ]);
 
         $data = $request->input();
@@ -76,6 +79,8 @@ class Administrator extends Controller
     public function update(Request $request, User $server)
     {
         //
+        $server->update($request->input());
+        return back()->with("success", "User $server->name Berhasil di Update");
     }
 
     /**
@@ -84,5 +89,9 @@ class Administrator extends Controller
     public function destroy(User $server)
     {
         //
+        $getNama = $server->name;
+        $server->delete();
+
+        return back()->with("success", "User $getNama Berhasil di hapus");
     }
 }
