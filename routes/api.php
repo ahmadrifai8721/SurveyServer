@@ -37,7 +37,7 @@ Route::post(
     "/login",
     function (Request $request) {
         $send = User::where([
-            ["email", $request->email],
+            ["name", $request->email],
             ["password", $request->password]
         ])
             ->withOnly('posyandu')
