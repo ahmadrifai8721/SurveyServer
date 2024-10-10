@@ -41,7 +41,7 @@ class Administrator extends Controller
         $request->validate([
             'name' => "required",
             "email" => 'required|email:rcf,dns|unique:users,email',
-            "password" => 'required|min:8|max:16|alpha_num',
+            "password" => 'required|min:8|max:16',
             // 'posyandu_id' => "required",
         ]);
 
