@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("users_id");
             $table->foreignId("daftar_balita_id");
+            $table->string("posyandu");
             $table->string("waktu");
             $table->string("namaMasakan");
             $table->string("jenis");

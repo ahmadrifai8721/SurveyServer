@@ -42,7 +42,7 @@ class Administrator extends Controller
             'name' => "required",
             "email" => 'required|email:rcf,dns|unique:users,email',
             "password" => 'required|min:8|max:16|alpha_num',
-            'posyandu_id' => "required",
+            // 'posyandu_id' => "required",
         ]);
 
         $data = $request->input();
