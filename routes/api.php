@@ -45,7 +45,7 @@ Route::post(
         $send = [
             "uuid" => $send->uuid,
             "name" => $send->name,
-            // "namaPosyandu" => $send->posyandu_id == null ? "Admin Posyandu" : $send->posyandu->nama,
+            "namaPosyandu" => "Admin Posyandu",
             "created_at" => $send->created_at,
         ];
         return response()->json([$send]);
