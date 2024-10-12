@@ -37,10 +37,11 @@
                         </div>
                     </div>
                     <div class="tab-content">
-                        <div class="tab-pane show active" id="fixed-header-preview">
+                        <div class="p-2 tab-pane show active" id="fixed-header-preview">
                             <table id="fixed-header-datatable"
-                                class="table table-bordered dt-responsive nowrap w-100 text-capitalize">
+                                class="table m-2 table-bordered dt-responsive nowrap w-100 text-capitalize">
                                 <h4 class="m-2">Nama Balita : {{ $daftarBalita->namaBalita }}</h4>
+                                <h4 class="m-2">Petugas : {{ auth()->User()->name }}</h4>
                                 <thead>
                                     <tr>
                                         <th rowspan="3" class="text-center align-middle fw-bold">Waktu Makan</th>
@@ -57,14 +58,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($daftarBalita->foodRecall as $data)
+                                    @foreach ($daftarBalita->foodRecall->groupBy('waktu') as $key => $data)
                                         <tr>
-                                            <td>{{ $data->waktu }}</td>
-                                            <td>{{ $data->namaMasakan }}</td>
-                                            <td>{{ $data->jenis }}</td>
-                                            <td>{{ $data->urt }}</td>
-                                            <td>{{ $data->gram }}</td>
+                                            {{-- {{ $data->count() + 1 }} --}}
+                                            <td rowspan="{{ $data->count() + 1 }}">{{ $key }}</td>
+
+                                            @foreach ($data as $item)
+                                        <tr>
+                                            <td>{{ $item->namaMasakan }}</td>
+                                            <td>{{ $item->jenis }}</td>
+                                            <td>{{ $item->urt }}</td>
+                                            <td>{{ $item->gram }}</td>
                                         </tr>
+                                    @endforeach
+                                    </td>
                                     @endforeach
                                 </tbody>
                             </table>
