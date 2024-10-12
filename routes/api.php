@@ -114,6 +114,7 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
                     ->get("id")[0]["id"];
             unset($data["uuid"]);
             $data["users_id"] = $request->uuid;
+            $data["gram"] = "dalam penghitungan";
             $send = foodRecall::create($data);
             return response()->json([$send]);
         });
