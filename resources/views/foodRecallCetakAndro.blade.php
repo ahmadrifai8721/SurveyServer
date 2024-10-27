@@ -14,7 +14,6 @@
                 <th colspan="2" class="text-center align-middle fw-bold">Banyak</th>
             </tr>
             <tr>
-                <th>URT</th>
                 <th>gram</th>
             </tr>
         </thead>
@@ -28,7 +27,6 @@
                 <tr>
                     <td>{{ $item->namaMasakan }}</td>
                     <td>{{ $item->jenis }}</td>
-                    <td>{{ $item->urt }}</td>
                     <td>{{ $item->gram }}</td>
                 </tr>
             @endforeach
