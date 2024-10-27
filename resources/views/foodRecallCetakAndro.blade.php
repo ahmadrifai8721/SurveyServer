@@ -27,7 +27,7 @@
                 <tr>
                     <td>{{ $item->namaMasakan }}</td>
                     <td>{{ $item->jenis }}</td>
-                    <td>{{ $item->gram }}</td>
+                    <td>{{ $item->urt }}</td>
                 </tr>
             @endforeach
             </td>
