@@ -15,6 +15,7 @@
             </tr>
             <tr>
                 <th>gram</th>
+                <th>Kalori</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,23 @@
                     <td>{{ $item->namaMasakan }}</td>
                     <td>{{ $item->jenis }}</td>
                     <td>{{ $item->urt }}</td>
+                    @php
+                        $jenis = explode('(', $item->jenis);
+                        $jenis = $jenis[0];
+                        if (App\Models\tableKomposisiPangan::where('kode', $jenis)->first() == null) {
+                            $energi = 0;
+                        } else {
+                            $energi =
+                                trim(
+                                    explode(
+                                        'kkal',
+                                        App\Models\tableKomposisiPangan::where('kode', $jenis)->first()->energi,
+                                    )[0],
+                                ) / 100;
+                        }
+
+                    @endphp
+                    <td>{{ $item->urt * $energi }}</td>
                 </tr>
             @endforeach
             </td>
