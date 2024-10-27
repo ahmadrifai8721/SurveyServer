@@ -106,7 +106,7 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
             $send = [];
             $i = 1;
             foreach (tableKomposisiPangan::all() as $key => $value) {
-                $send[$i++] = $value->kode . "/ $value->namaMakana";
+                $send[$i++] = $value->kode . "( $value->namaMakana )";
             }
             return response()->json([$send]);
         });
