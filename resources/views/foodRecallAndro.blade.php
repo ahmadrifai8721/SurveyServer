@@ -9,7 +9,7 @@
                 <tr>
                     <th>Nama Balita</th>
                     <th>Petugas</th>
-                    <th>Tanggal Penyuluhan</th>
+                    <th>Tanggal Pelaksanaan</th>
                     <th></th>
                 </tr>
             </thead>
