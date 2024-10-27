@@ -114,13 +114,24 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
             $data = $request->input();
             $balita = explode("(", $request->daftar_balita_id);
             $namaBalita = $balita[0];
-            $namaIbu = explode(")", $balita[1])[0];
-            $namaIbu = trim($namaIbu);
-            // return $namaIbu;
-            $data["daftar_balita_id"] =
-                daftarBalita::where("namaBalita", $namaBalita)
-                    ->where("namaIbu", $namaIbu)
-                    ->get("id")[0]["id"];
+            if (count($balita) == 2) {
+                # code...
+                $namaIbu = explode(")", $balita[1])[0];
+                $namaIbu = trim($namaIbu);
+                // return $namaIbu;
+                $data["daftar_balita_id"] =
+                    daftarBalita::where("namaBalita", $namaBalita)
+                        ->where("namaIbu", $namaIbu)
+                        ->get("id")[0]["id"];
+            } else {
+                $data["daftar_balita_id"] = daftarBalita::create([
+                    "namaIbu" => "Generate By Sistem",
+                    "namaBalita" => $request->daftar_balita_id,
+                    "alamat" => "Generate By Sistem"
+                ])->id;
+            }
+
+
             unset($data["uuid"]);
             $data["users_id"] = $request->uuid;
             $data["gram"] = "dalam penghitungan";
