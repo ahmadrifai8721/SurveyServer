@@ -4,6 +4,7 @@ use App\Models\daftarBalita;
 use App\Models\foodRecall;
 use App\Models\Respondent;
 use App\Models\Survey;
+use App\Models\tableKomposisiPangan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -98,6 +99,14 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
             $i = 1;
             foreach (daftarBalita::all() as $key => $value) {
                 $send[$i++] = $value->namaBalita . "( $value->namaIbu )";
+            }
+            return response()->json([$send]);
+        });
+        route::get("/getTKP", function () {
+            $send = [];
+            $i = 1;
+            foreach (tableKomposisiPangan::all() as $key => $value) {
+                $send[$i++] = $value->kode . "/ $value->namaMakana";
             }
             return response()->json([$send]);
         });
