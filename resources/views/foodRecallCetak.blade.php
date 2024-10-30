@@ -46,40 +46,105 @@
                                     <tr>
                                         <th rowspan="3" class="text-center align-middle fw-bold">Waktu Makan</th>
                                         <th rowspan="3" class="text-center align-middle fw-bold">Nama Makanan</th>
-                                        <th colspan="3" class="text-center align-middle fw-bold">Bahan Makanan</th>
+                                        <th colspan="4" class="text-center align-middle fw-bold">Bahan Makanan</th>
                                     </tr>
                                     <tr>
                                         <th rowspan="2" class="text-center align-middle fw-bold">Jenis</th>
                                         <th colspan="2" class="text-center align-middle fw-bold">Banyak</th>
+                                        <th rowspan="2" class="text-center align-middle fw-bold">keterangan</th>
                                     </tr>
                                     <tr>
-                                        <th>URT</th>
                                         <th>gram</th>
+                                        <th>Kalori</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $totalEnergi = 0;
+                                    @endphp
                                     @foreach ($daftarBalita->foodRecall->groupBy('waktu') as $key => $data)
-                                        <tr>
+                                        <tr style="page-break-before: always;">
                                             {{-- {{ $data->count() + 1 }} --}}
                                             <td rowspan="{{ $data->count() + 1 }}">{{ $key }}</td>
+                                            @php
+                                                $subtotalEnergi = 0;
+                                                $keyLast = '';
+                                                $keyLast = $key;
+                                            @endphp
 
                                             @foreach ($data as $item)
                                         <tr>
                                             <td>{{ $item->namaMasakan }}</td>
                                             <td>{{ $item->jenis }}</td>
                                             <td>{{ $item->urt }}</td>
-                                            <td>{{ $item->gram }}</td>
+                                            @php
+                                                $jenis = explode('(', $item->jenis);
+                                                $jenis = $jenis[0];
+                                                if (
+                                                    App\Models\tableKomposisiPangan::where('kode', $jenis)->first() ==
+                                                    null
+                                                ) {
+                                                    $energi = 0;
+                                                } else {
+                                                    $energi =
+                                                        trim(
+                                                            explode(
+                                                                'kkal',
+                                                                App\Models\tableKomposisiPangan::where(
+                                                                    'kode',
+                                                                    $jenis,
+                                                                )->first()->energi,
+                                                            )[0],
+                                                        ) / 100;
+                                                }
+
+                                                if ($key == $keyLast) {
+                                                    $subtotalEnergi = $subtotalEnergi + $item->urt * $energi;
+                                                } else {
+                                                    $subtotalEnergi = 0;
+                                                    $subtotalEnergi = $subtotalEnergi + $item->urt * $energi;
+                                                }
+                                            @endphp
+                                            <td>{{ $item->urt * $energi }}</td>
                                         </tr>
                                     @endforeach
-                                    </td>
+                                    <td class="text-end" colspan="4"><strong> Subtotal</strong></td>
+                                    @if ($subtotalEnergi >= 550)
+                                        <td class="h5 text-success">{{ $subtotalEnergi }}</td>
+                                        <td>
+                                            <h5>
+                                                <strong>
+                                                    Kalori Cukup
+                                                </strong>
+                                            </h5>
+                                        </td>
+                                    @else
+                                        <td class="h5 text-danger">{{ $subtotalEnergi }}</td>
+                                        <td>
+                                            <h5>
+                                                <strong>
+                                                    Kalori Kurang
+                                                </strong>
+                                            </h5>
+                                        </td>
+                                    @endif
+                                    @php
+                                        $totalEnergi = $subtotalEnergi + $totalEnergi;
+                                    @endphp
                                     @endforeach
+                                    <tr>
+                                        <td class="text-end" colspan="4"><strong> Total</strong></td>
+                                        <td>
+                                            <h5><strong>{{ $totalEnergi }}</strong></h5>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
-                            <small class="d-none d-print-block">
+                            {{-- <small class="d-none d-print-block">
                                 # Konversi dari URT menjadi gram dilakukan oleh pewawancara
                                 <br>
                                 * Jika responden mengonsumsi makanan/minuman industri, sebutkan merknya
-                            </small>
+                            </small> --}}
                         </div> <!-- end preview-->
 
                     </div> <!-- end tab-content-->
