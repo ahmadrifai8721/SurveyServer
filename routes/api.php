@@ -124,11 +124,17 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
                         ->where("namaIbu", $namaIbu)
                         ->get("id")[0]["id"];
             } else {
-                $data["daftar_balita_id"] = daftarBalita::create([
+                $data["daftar_balita_id"] = daftarBalita::updateOrCreate([
                     "namaIbu" => "Generate By Sistem",
                     "namaBalita" => $request->daftar_balita_id,
                     "alamat" => "Generate By Sistem"
-                ])->id;
+                ],
+                [
+                    "namaIbu" => "Generate By Sistem",
+                    "namaBalita" => $request->daftar_balita_id,
+                    "alamat" => "Generate By Sistem"
+                ]
+                )->id;
             }
 
 
