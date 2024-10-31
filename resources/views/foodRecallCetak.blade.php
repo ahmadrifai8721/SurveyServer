@@ -51,7 +51,6 @@
                                     <tr>
                                         <th rowspan="2" class="text-center align-middle fw-bold">Jenis</th>
                                         <th colspan="2" class="text-center align-middle fw-bold">Banyak</th>
-                                        <th rowspan="2" class="text-center align-middle fw-bold">keterangan</th>
                                     </tr>
                                     <tr>
                                         <th>gram</th>
@@ -109,34 +108,23 @@
                                         </tr>
                                     @endforeach
                                     <td class="text-end" colspan="4"><strong> Subtotal</strong></td>
-                                    @if ($subtotalEnergi >= 550)
-                                        <td class="h5 text-success">{{ $subtotalEnergi }}</td>
-                                        <td>
-                                            <h5>
-                                                <strong>
-                                                    Kalori Cukup
-                                                </strong>
-                                            </h5>
-                                        </td>
-                                    @else
-                                        <td class="h5 text-danger">{{ $subtotalEnergi }}</td>
-                                        <td>
-                                            <h5>
-                                                <strong>
-                                                    Kalori Kurang
-                                                </strong>
-                                            </h5>
-                                        </td>
-                                    @endif
+                                    <td class="h5">{{ $subtotalEnergi }}</td>
+
                                     @php
                                         $totalEnergi = $subtotalEnergi + $totalEnergi;
                                     @endphp
                                     @endforeach
                                     <tr>
                                         <td class="text-end" colspan="4"><strong> Total</strong></td>
-                                        <td>
-                                            <h5><strong>{{ $totalEnergi }}</strong></h5>
-                                        </td>
+                                        @if ($totalEnergi >= 550)
+                                            <td class="h5 text-success">{{ $totalEnergi }}
+                                                <p class="h5 text-succes">( Kalori Cukup )</p>
+                                            </td>
+                                        @else
+                                            <td class="h5 text-danger">{{ $totalEnergi }}
+                                                <p class="h5 text-succes">( Kalori Kurang )</p>
+                                            </td>
+                                        @endif
                                     </tr>
                                 </tbody>
                             </table>
