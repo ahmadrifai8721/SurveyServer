@@ -3,6 +3,11 @@
     <table id="fixed-header-datatable" class="table table-bordered dt-responsive nowrap w-100 text-capitalize">
         <h4 class="m-2">Nama Balita : {{ $daftarBalita->namaBalita }}</h4>
         <h4 class="m-2">Petugas : {{ $daftarBalita->foodRecall->where('users_id', $uuid)->first()->penyuluh->name }}</h4>
+        <div class="d-print-none ">
+            <a onclick="print()">
+                <span class="btn btn-info">Cetak</span>
+            </a>
+        </div>
         <thead>
             <tr>
                 <th rowspan="3" class="text-center align-middle fw-bold">Waktu Makan</th>
