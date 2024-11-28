@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class adminimport implements ToModel, WithStartRow
+class adminImport implements ToModel, WithStartRow
 {
 
     // public $uuid = Str::uuid();
