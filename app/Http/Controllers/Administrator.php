@@ -42,7 +42,7 @@ class Administrator extends Controller
             # code...
             // dd($request->file("excel"));
 
-            $data = Excel::toCollection(new adminImport, $request->file('excel'))->first();
+            $data = Excel::toCollection(new adminimport, $request->file('excel'))->first();
 
             foreach ($data as $key => $value) {
                 if ($value[0]) {
