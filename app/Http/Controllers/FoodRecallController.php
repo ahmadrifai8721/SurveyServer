@@ -25,7 +25,7 @@ class FoodRecallController extends Controller
     public function create()
     {
         //
-        return view("foodRecalllaporan", [
+        return view("foodRecallLaporan", [
             "pageTitle" => "Food Recal Generate Report",
         ]);
     }
