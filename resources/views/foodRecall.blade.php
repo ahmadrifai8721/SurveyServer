@@ -20,6 +20,10 @@
             </div>
         </div>
         <!-- end page title -->
+        <div class="my-2">
+
+            <a href="{{ route('foodRecall.create') }}" class="btn btn-soft-primary"><strong>Buat laporan</strong></a>
+        </div>
 
         <div class="row">
             <div class="col-12">

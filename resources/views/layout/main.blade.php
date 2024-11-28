@@ -23,7 +23,7 @@
 
     <!-- Icons css -->
     <link href="{{ url('/') }}/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-
+    @livewireStyles
     @yield('css')
 </head>
 
@@ -61,6 +61,9 @@
     @include('layout/tools')
     <!-- Vendor js -->
     <script src="{{ url('/') }}/assets/js/vendor.min.js"></script>
+
+    @livewireScripts
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         const Toast = Swal.mixin({

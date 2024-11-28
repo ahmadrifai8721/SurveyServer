@@ -8,8 +8,10 @@ use App\Http\Controllers\MateriAppController;
 use App\Http\Controllers\posyanduController;
 use App\Http\Controllers\UsersList;
 use App\Models\daftarBalita;
+use App\Models\foodRecall;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -49,12 +51,32 @@ Route::get('/', [Dashboard::class, 'index'])->name('home')->middleware("auth");
 Route::get('/SurveyList', [Dashboard::class, 'survey'])->name('survey')->middleware("auth");
 Route::resource('/respondent', UsersList::class)->middleware("auth");
 Route::resource('/foodRecall', FoodRecallController::class)->middleware("auth");
+
 Route::get('/foodRecallCetak{daftarBalita}', function (daftarBalita $daftarBalita) {
     return view("foodRecallCetak", [
         "pageTitle" => "Food Recal Report | $daftarBalita->namaBalita ( $daftarBalita->namaIbu )",
         "daftarBalita" => $daftarBalita
     ]);
 })->name("foodRecallCetak")->middleware("auth");
+Route::post('/foodRecallGenerate', function (Request $request) {
+    // dump($request->input('Tanggal'));
+    $tanggal = $request->input('Tanggal');
+    $foodRecall = foodRecall::where("created_at", 'like', "%" . $tanggal . "%")->get()->groupBy("created_at");
+    $data = [];
+    $i = 1;
+    foreach ($foodRecall as $key => $value) {
+        foreach ($value->groupBy("daftar_balita_id") as $key1 => $value1) {
+            # code...
+            $data[$key1] = $value1->first()->daftarBalita;
+        }
+    }
+    // return $data;
+    return view("layout.template-cetak", [
+        "pageTitle" => "Food Recal Report Generate | " . Carbon::parse($tanggal)->isoFormat("DD MMMM YYYY"),
+        "dataPerTanggal" => $data,
+        "tanggal" => $tanggal
+    ]);
+})->name("foodRecallGenerate")->middleware("auth");
 Route::resource('/daftarBalita', daftarBalitaController::class)->middleware("auth");
 Route::post('/clearBalita', function () {
     DB::statement('SET FOREIGN_KEY_CHECKS=0;');
