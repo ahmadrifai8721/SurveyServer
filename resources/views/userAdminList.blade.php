@@ -24,6 +24,38 @@
         <button type="button" class="mb-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahadmin">
             <i class="mdi mdi-account-plus-outline"></i> Buat admin Baru
         </button>
+        <button type="button" class="mb-2 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#importadmin">
+            <i class="mdi mdi-account-plus-outline"></i> Import admin
+        </button>
+        <!-- Modal Import -->
+        <div class="modal fade" id="importadmin" tabindex="-1" aria-labelledby="importadminLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="importadminLabel">Import Balita</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('Administrator.store') }}" method="POST" enctype="multipart/form-data">
+
+                            @csrf
+                            <a href="{{ url('/assets/tempimportadmin.xlsx') }}" class="mb-2 btn btn-secondary">
+                                <i class="mdi mdi-microsoft-excel"></i> Download Template
+                            </a>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Upload File</label>
+                                <input class="form-control" type="file" id="formFile" name="excel">
+                            </div>
+
+                            <div class="gap-2 d-grid ">
+                                <button class="btn btn-primary" type="submit">Import</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {{-- <button type="button" class="mb-2 btn btn-danger" data-bs-toggle="modal" data-bs-target="#daftarPosyandu">
             <i class="mdi mdi-hospital-marker"></i> Daftar Posyandu
         </button>
@@ -193,8 +225,8 @@
                                                                 id="userView-{{ $item->uuid }}Label">
                                                                 {{ $item->name }}
                                                             </h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="mb-3 form-floating">

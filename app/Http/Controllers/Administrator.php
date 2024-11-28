@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\adminimport;
 use App\Models\posyandu;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rules\Unique;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Administrator extends Controller
 {
@@ -37,22 +38,44 @@ class Administrator extends Controller
     public function store(Request $request)
     {
         //
+        if ($request->file("excel")) {
+            # code...
+            // dd($request->file("excel"));
 
-        $request->validate([
-            'name' => "required",
-            "email" => 'required|email:rcf,dns|unique:users,email',
-            "password" => 'required|min:8|max:16',
-            // 'posyandu_id' => "required",
-        ]);
+            $data = Excel::toCollection(new adminimport, $request->file('excel'))->first();
 
-        $data = $request->input();
-        $data["uuid"] = Str::uuid();
+            foreach ($data as $key => $value) {
+                if ($value[0]) {
+                    # code...
+                    $up = $value;
+                    $value["uuid"] = Str::uuid();
+                    User::create([
+                        'name' => $value[1],
+                        'email' => $value[2],
+                        'password' => $value[3],
+                        'uuid' => $value['uuid'],
+                    ]);
+                }
+            }
 
-        $add = User::create($data);
-        if ($add) {
-            return back()->with("success", "User $request->name Berhasil di Tambahkan");
+            return back()->with('success', 'All good!');
         } else {
-            return back()->withErrors("User gagal di Tambahkan");
+            $request->validate([
+                'name' => "required",
+                "email" => 'required|email:rcf,dns|unique:users,email',
+                "password" => 'required|min:8|max:16',
+                // 'posyandu_id' => "required",
+            ]);
+
+            $data = $request->input();
+            $data["uuid"] = Str::uuid();
+
+            $add = User::create($data);
+            if ($add) {
+                return back()->with("success", "User $request->name Berhasil di Tambahkan");
+            } else {
+                return back()->withErrors("User gagal di Tambahkan");
+            }
         }
     }
 
