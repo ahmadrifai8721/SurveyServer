@@ -35,6 +35,7 @@
                                             <th>Nama Balita</th>
                                             <th>Petugas</th>
                                             <th>Tanggal Pelaksanaan</th>
+                                            <th>Tanggal Input</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -44,18 +45,21 @@
                                                 <td>{{ $result->daftarBalita->namaBalita }}</td>
                                                 <td>{{ $result->penyuluh->name }}</td>
                                                 <td>
-                                                    {!! '<strong>' .
-                                                        $result->waktu .
-                                                        '</strong> ' .
-                                                        $result->created_at .
-                                                        '( ' .
-                                                        $result->created_at->diffForHumans() .
-                                                        ' )' !!}
+                                                    {!! '<strong>' . $result->waktu . '</strong> ' . '( ' . $result->created_at->diffForHumans() . ' )' !!}
                                                 </td>
+                                                <td>{{ $result->created_at }}</td>
                                                 <td>
-                                                    <a href="{{ route('foodRecallCetak', $result->daftarBalita->id) }}">
-                                                        <span class="badge badge-info bg-info">Cetak</span>
-                                                    </a>
+                                                    <form action="{{ route('foodRecall.destroy', $result->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="{{ route('foodRecallCetak', $result->daftarBalita->id) }}">
+                                                            <span class="badge badge-info bg-info">Cetak</span>
+                                                        </a>
+                                                        <button type="submit" class="btn btn-link">
+                                                            <span class="badge badge-danger bg-danger">Hapus Data</span>
+                                                        </button>
+                                                    </form>
 
                                                 </td>
                                             </tr>
@@ -69,7 +73,8 @@
                                         <tr>
                                             <th>Nama Balita</th>
                                             <th>Petugas</th>
-                                            <th>Tanggal Penyuluhan</th>
+                                            <th>Tanggal Pelaksanan</th>
+                                            <th>Tanggal Input</th>
                                             <th></th>
                                         </tr>
                                     </tfoot>

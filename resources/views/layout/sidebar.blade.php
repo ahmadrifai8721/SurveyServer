@@ -91,17 +91,17 @@
                     <span> Administrator </span>
                 </a>
             </li>
+            {{--
+            <li class="side-nav-title">Apps</li>
 
-            {{-- <li class="side-nav-title">Apps</li>
-
-            <li class="side-nav-item">
+            {{-- <li class="side-nav-item">
                 <a href="apps-file-manager.html" class="side-nav-link">
                     <i class="uil-folder-plus"></i>
                     <span> File APK </span>
                 </a>
             </li>
             <li class="side-nav-item">
-                <a href="apps-file-manager.html" class="side-nav-link">
+                <a href="{{ route('materi.index') }}" class="side-nav-link">
                     <i class=" uil-books"></i>
                     <span> material files / pdf files </span>
                 </a>

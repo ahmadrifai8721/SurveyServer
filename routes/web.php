@@ -4,6 +4,7 @@ use App\Http\Controllers\Administrator;
 use App\Http\Controllers\daftarBalitaController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\FoodRecallController;
+use App\Http\Controllers\MateriAppController;
 use App\Http\Controllers\posyanduController;
 use App\Http\Controllers\UsersList;
 use App\Models\daftarBalita;
@@ -76,5 +77,9 @@ Route::prefix("/admin")->middleware("auth")->group(
 
             return redirect('/');
         })->name("logout");
+
+        Route::prefix("app")->group(function () {
+            Route::resource('materi', MateriAppController::class);
+        });
     }
 );

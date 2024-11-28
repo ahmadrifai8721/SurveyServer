@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\foodRecall;
+use App\Models\MateriApp;
+use App\Models\posyandu;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class FoodRecallController extends Controller
+class MateriAppController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +15,10 @@ class FoodRecallController extends Controller
     public function index()
     {
         //
-        return view("foodRecall", [
-            "pageTitle" => "Food Recal Report",
-            "foodRecall" => foodRecall::all()
+        return view("userAdminList", [
+            "pageTitle" => "Materi List",
+            "materi" => User::all(),
+            "posyandu" => posyandu::all()
         ]);
     }
 
@@ -38,16 +41,15 @@ class FoodRecallController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(foodRecall $foodRecall, Request $request)
+    public function show(MateriApp $materiApp)
     {
         //
-
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(foodRecall $foodRecall)
+    public function edit(MateriApp $materiApp)
     {
         //
     }
@@ -55,7 +57,7 @@ class FoodRecallController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, foodRecall $foodRecall)
+    public function update(Request $request, MateriApp $materiApp)
     {
         //
     }
@@ -63,11 +65,8 @@ class FoodRecallController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(foodRecall $foodRecall)
+    public function destroy(MateriApp $materiApp)
     {
         //
-        $data = $foodRecall->daftarBalita->namaBalita . " data tanggal $foodRecall->created_at Berhasil Di Hapus";
-        $foodRecall->delete();
-        return back()->with('success', "Data $data");
     }
 }

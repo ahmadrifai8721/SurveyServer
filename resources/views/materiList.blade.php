@@ -12,17 +12,17 @@
                         <ol class="m-0 breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript: void(0);">Kiss Bunda</a></li>
                             <li class="breadcrumb-item"><a href="javascript: void(0);">User</a></li>
-                            <li class="breadcrumb-item active">materi</li>
+                            <li class="breadcrumb-item active">Admin</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Daftar materi</h4>
+                    <h4 class="page-title">Daftar admin</h4>
                 </div>
             </div>
         </div>
         <!-- end page title -->
         <!-- Button trigger modal -->
-        <button type="button" class="mb-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahmateri">
-            <i class="mdi mdi-account-plus-outline"></i> Buat Materi Baru
+        <button type="button" class="mb-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahAdmin">
+            <i class="mdi mdi-account-plus-outline"></i> Buat Akun Baru
         </button>
         {{-- <button type="button" class="mb-2 btn btn-danger" data-bs-toggle="modal" data-bs-target="#daftarPosyandu">
             <i class="mdi mdi-hospital-marker"></i> Daftar Posyandu
@@ -90,15 +90,15 @@
         </div> --}}
 
         {{-- model Tambah User --}}
-        <div class="modal fade" id="tambahmateri" tabindex="-1" aria-labelledby="tambahmateriLabel" aria-hidden="true">
+        <div class="modal fade" id="tambahAdmin" tabindex="-1" aria-labelledby="tambahAdminLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="tambahmateriLabel">Buat Materi Baru</h1>
+                        <h1 class="modal-title fs-5" id="tambahAdminLabel">Buat Akun Baru</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('materi.store') }}" method="post">
+                        <form action="{{ route('Administrator.store') }}" method="post">
 
                             @csrf
 
@@ -139,7 +139,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Daftar materi</h4>
+                        <h4 class="header-title">Daftar admin</h4>
                         <div class="tab-content">
                             <div class="tab-pane show active" id="fixed-header-preview">
                                 <table id="fixed-header-datatable" class="table table-striped dt-responsive nowrap w-100">
@@ -152,7 +152,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($materi as $item)
+                                        @forelse ($admin as $item)
                                             {{-- @dd($item->email) --}}
                                             <tr>
                                                 <td>{{ $item->name }}</td>
@@ -160,7 +160,7 @@
                                                 {{-- <td>{{ $item->posyandu_id == null ? 'Posyandu belum di pilih' : $item->posyandu->nama }} --}}
                                                 </td>
                                                 <td>
-                                                    <form action="{{ route('materi.destroy', $item->uuid) }}"
+                                                    <form action="{{ route('Administrator.destroy', $item->uuid) }}"
                                                         method="post">
 
                                                         @csrf
@@ -193,8 +193,8 @@
                                                                 id="userView-{{ $item->uuid }}Label">
                                                                 {{ $item->name }}
                                                             </h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="mb-3 form-floating">
@@ -224,14 +224,14 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h1 class="modal-title fs-5"
-                                                                id="userEdit-{{ $item->uuid }}Label">Edit Materi
+                                                                id="userEdit-{{ $item->uuid }}Label">Edit Akun
                                                                 {{ $item->name }}</h1>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
                                                             <form
-                                                                action="{{ route('materi.update', $item->uuid) }}"
+                                                                action="{{ route('Administrator.update', $item->uuid) }}"
                                                                 method="post">
 
                                                                 @csrf
