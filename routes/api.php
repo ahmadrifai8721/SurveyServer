@@ -46,7 +46,7 @@ Route::post(
         $send = [
             "uuid" => $send->uuid,
             "name" => $send->name,
-            "namaPosyandu" => "Admin Posyandu",
+            "namaPosyandu" => $send->posyandu->nama,
             "created_at" => $send->created_at,
         ];
         return response()->json([$send]);
@@ -124,16 +124,17 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
                         ->where("namaIbu", $namaIbu)
                         ->get("id")[0]["id"];
             } else {
-                $data["daftar_balita_id"] = daftarBalita::updateOrCreate([
-                    "namaIbu" => "Generate By Sistem",
-                    "namaBalita" => $request->daftar_balita_id,
-                    "alamat" => "Generate By Sistem"
-                ],
-                [
-                    "namaIbu" => "Generate By Sistem",
-                    "namaBalita" => $request->daftar_balita_id,
-                    "alamat" => "Generate By Sistem"
-                ]
+                $data["daftar_balita_id"] = daftarBalita::updateOrCreate(
+                    [
+                        "namaIbu" => "Generate By Sistem",
+                        "namaBalita" => $request->daftar_balita_id,
+                        "alamat" => "Generate By Sistem"
+                    ],
+                    [
+                        "namaIbu" => "Generate By Sistem",
+                        "namaBalita" => $request->daftar_balita_id,
+                        "alamat" => "Generate By Sistem"
+                    ]
                 )->id;
             }
 
