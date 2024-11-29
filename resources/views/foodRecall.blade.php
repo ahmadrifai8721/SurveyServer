@@ -51,7 +51,7 @@
                                                     {{ $result->penyuluh->posyandu ? $result->penyuluh->posyandu->nama : 'Posyandu Belum Dipilih' }}
                                                     )</td>
                                                 <td>
-                                                    {!! '<strong>' . $result->waktu . '</strong> ' . '( ' . $result->created_at->diffForHumans() . ' )' !!}
+                                                    {!! '<strong>' . $result->waktu . '</strong> ' . '( ' . $result->tanggal . ' )' !!}
                                                 </td>
                                                 <td>{{ $result->created_at }}</td>
                                                 <td>
