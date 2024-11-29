@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("jenis");
             $table->string("urt");
             $table->string("gram");
+            $table->string("tanggal");
             $table->timestamps();
         });
     }
