@@ -47,7 +47,9 @@
                                         @forelse ($foodRecall as $result)
                                             <tr>
                                                 <td>{{ $result->daftarBalita->namaBalita }}</td>
-                                                <td>{{ $result->penyuluh->name }}</td>
+                                                <td>{{ $result->penyuluh->name }} (
+                                                    {{ $result->penyuluh->posyandu ? $result->penyuluh->posyandu->nama : 'Posyandu Belum Dipilih' }}
+                                                    )</td>
                                                 <td>
                                                     {!! '<strong>' . $result->waktu . '</strong> ' . '( ' . $result->created_at->diffForHumans() . ' )' !!}
                                                 </td>

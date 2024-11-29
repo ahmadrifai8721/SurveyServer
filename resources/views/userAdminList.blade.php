@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        {{-- <button type="button" class="mb-2 btn btn-danger" data-bs-toggle="modal" data-bs-target="#daftarPosyandu">
+        <button type="button" class="mb-2 btn btn-danger" data-bs-toggle="modal" data-bs-target="#daftarPosyandu">
             <i class="mdi mdi-hospital-marker"></i> Daftar Posyandu
         </button>
 
@@ -119,7 +119,7 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
         {{-- model Tambah User --}}
         <div class="modal fade" id="tambahadmin" tabindex="-1" aria-labelledby="tambahadminLabel" aria-hidden="true">
@@ -139,7 +139,7 @@
                                     name="name">
                                 <label for="name">Nama Lengkap</label>
                             </div>
-                            {{-- <div class="mb-3 form-floating">
+                            <div class="mb-3 form-floating">
                                 <select name="posyandu_id" id="Addposyandu" class="form-select select2">
                                     @forelse ($posyandu as $item)
                                         <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -148,7 +148,7 @@
                                     @endforelse
                                 </select>
                                 <label for="name">Posyandu</label>
-                            </div> --}}
+                            </div>
                             <div class="mb-3 form-floating">
                                 <input type="email" class="form-control" id="Addemail" placeholder="Email"
                                     name="email">
@@ -179,7 +179,7 @@
                                         <tr class="text-capitalize">
                                             <th>nama</th>
                                             <th>email</th>
-                                            {{-- <th>posyandu</th> --}}
+                                            <th>posyandu</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -189,7 +189,7 @@
                                             <tr>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->email }}</td>
-                                                {{-- <td>{{ $item->posyandu_id == null ? 'Posyandu belum di pilih' : $item->posyandu->nama }} --}}
+                                                <td>{{ $item->posyandu_id == null ? 'Posyandu belum di pilih' : $item->posyandu->nama }}
                                                 </td>
                                                 <td>
                                                     <form action="{{ route('Administrator.destroy', $item->uuid) }}"
@@ -234,12 +234,12 @@
                                                                     value="{{ $item->name }}" readonly>
                                                                 <label for="name">Nama Lengkap</label>
                                                             </div>
-                                                            {{-- <div class="mb-3 form-floating">
+                                                            <div class="mb-3 form-floating">
                                                                 <input type="text" class="form-control"
                                                                     value="{{ $item->posyandu_id == null ? 'Posyandu belum di pilih' : $item->posyandu->nama }}"
                                                                     readonly>
                                                                 <label for="name">Posyandu</label>
-                                                            </div> --}}
+                                                            </div>
                                                             <div class="mb-3 form-floating">
                                                                 <input type="text" class="form-control"
                                                                     value="{{ $item->email }}" readonly>
@@ -275,7 +275,7 @@
                                                                         name="name" value="{{ $item->name }}">
                                                                     <label for="name">Nama Lengkap</label>
                                                                 </div>
-                                                                {{-- <div class="mb-3 form-floating">
+                                                                <div class="mb-3 form-floating">
                                                                     <select name="posyandu_id" id="posyandu"
                                                                         class="form-select">
                                                                         <option value="0"
@@ -290,7 +290,7 @@
                                                                         @endforelse
                                                                     </select>
                                                                     <label for="name">Posyandu</label>
-                                                                </div> --}}
+                                                                </div>
                                                                 <div class="mb-3 form-floating">
                                                                     <input type="email" class="form-control"
                                                                         id="email" placeholder="Email" name="email"
