@@ -1,13 +1,25 @@
 @extends('layout/mainAndro')
 @section('content')
-    <table id="fixed-header-datatable" class="table table-bordered dt-responsive nowrap w-100 text-capitalize">
+    <div class="container-fluid">
         <h4 class="m-2">Nama Balita : {{ $daftarBalita->namaBalita }}</h4>
         <h4 class="m-2">Petugas : {{ $daftarBalita->foodRecall->where('users_id', $uuid)->first()->penyuluh->name }}</h4>
-        <div class="d-print-none ">
-            <a onclick="print()">
-                <span class="btn btn-info">Cetak</span>
-            </a>
-        </div>
+        {{-- <h4 class="m-2">Tanggal : {{ $tanggal }}</h4> --}}
+        <form action="{{ url()->current() }}" method="get" class="row">
+            <input type="hidden" name="uuid" value="{{ $uuid }}">
+            <div class="mb-3 form-floating col-md-3">
+                <input type="date" class="form-control" id="floatingInput" placeholder="Masukan Tanggal" name="tanggal"
+                    value="{{ $tanggal1 }}">
+                <label for="floatingInput">Tanggal</label>
+            </div>
+            <div class=" col-md-3">
+                <button type="submit" class="btn btn-lg btn-primary">Filter</button>
+                <a href="{{ route('foodRecallCetakAndro', $daftarBalita->id) }}?uuid={{ $uuid }}"
+                    class="btn btn-danger btn-lg">
+                    Reset
+                    Filter</a>
+        </form>
+    </div>
+    <table id="fixed-header-datatable" class="table table-bordered dt-responsive nowrap w-100 text-capitalize">
         <thead>
             <tr>
                 <th rowspan="3" class="text-center align-middle fw-bold">Waktu Makan</th>
@@ -28,7 +40,8 @@
             @php
                 $totalEnergi = 0;
             @endphp
-            @foreach ($daftarBalita->foodRecall->groupBy('waktu') as $key => $data)
+            {{-- @dump($tanggal) --}}
+            @foreach ($tanggal ? $daftarBalita->foodRecall->where('tanggal', $tanggal)->groupBy('waktu') : $daftarBalita->foodRecall->groupBy('waktu') as $key => $data)
                 <tr style="page-break-before: always;">
                     {{-- {{ $data->count() + 1 }} --}}
                     <td rowspan="{{ $data->count() + 1 }}">{{ $key }}</td>

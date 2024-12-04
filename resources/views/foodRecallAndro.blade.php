@@ -29,7 +29,7 @@
                         </td>
                         <td>
                             <a
-                                href="{{ route('foodRecallCetakAndro', $result->daftarBalita->id) . '/?uuid=' . $result->penyuluh->uuid }}">
+                                href="{{ route('foodRecallCetakAndro', $result->daftarBalita->id) . '/?uuid=' . $result->penyuluh->uuid.'&tanggal='.$result->tanggal }}">
                                 <span class="badge badge-info bg-info">Cetak</span>
                             </a>
 
