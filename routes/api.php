@@ -43,7 +43,7 @@ Route::post(
         ])
             ->withOnly('posyandu')
             ->first();
-        dump($send);
+        dump($request->input());
         if ($send) {
             return response()->json([$send]);
         } else {
