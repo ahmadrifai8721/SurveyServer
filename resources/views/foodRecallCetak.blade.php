@@ -45,12 +45,12 @@
                                 <div class="m-2 form-floating">
                                     <form action="" method="get">
                                         <select class="form-select" id="floatingSelect" aria-label="tanggal pelasksanaan"
-                                            onchange="">
+                                            onchange="this.form.submit()" name="tanggal">
                                             <option selected>Pilih Tanggal Pelaksanaan</option>
                                             @foreach ($daftarBalita->foodRecall()->get()->groupBy('tanggal') as $key => $data)
                                                 <option value="{{ $key }}"
                                                     @if ($key == $tanggal) selected @endif>{{ $key }}
-                                                    onchange="this.form.submit()"
+
                                                 </option>
                                             @endforeach
                                         </select>
