@@ -53,8 +53,10 @@ Route::resource('/respondent', UsersList::class)->middleware("auth");
 Route::resource('/foodRecall', FoodRecallController::class)->middleware("auth");
 
 Route::get('/foodRecallCetak{daftarBalita}', function (daftarBalita $daftarBalita) {
+
     return view("foodRecallCetak", [
         "pageTitle" => "Food Recal Report | $daftarBalita->namaBalita ( $daftarBalita->namaIbu )",
+        "tanggal" => request()->input("tanggal") === null ? $daftarBalita->foodRecall->last()->tanggal : request()->input("tanggal"),
         "daftarBalita" => $daftarBalita
     ]);
 })->name("foodRecallCetak")->middleware("auth");

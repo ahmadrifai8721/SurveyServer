@@ -42,6 +42,17 @@
                                 class="table m-2 table-bordered dt-responsive nowrap w-100 text-capitalize">
                                 <h4 class="m-2">Nama Balita : {{ $daftarBalita->namaBalita }}</h4>
                                 <h4 class="m-2">Petugas : {{ auth()->User()->name }}</h4>
+                                <div class="m-2 form-floating">
+                                    <select class="form-select" id="floatingSelect" aria-label="tanggal pelasksanaan">
+                                        <option selected>Pilih Tanggal Pelaksanaan</option>
+                                        @foreach ($daftarBalita->foodRecall()->get()->groupBy('tanggal') as $key => $data)
+                                            <option value="{{ $key }}"
+                                                @if ($key == $tanggal) selected @endif>{{ $key }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <label for="floatingSelect">Tanggal Pelaksanaan :</label>
+                                </div>
                                 <thead>
                                     <tr>
                                         <th rowspan="3" class="text-center align-middle fw-bold">Waktu Makan</th>
@@ -61,7 +72,7 @@
                                     @php
                                         $totalEnergi = 0;
                                     @endphp
-                                    @foreach ($daftarBalita->foodRecall->groupBy('waktu') as $key => $data)
+                                    @foreach ($daftarBalita->foodRecall()->where('tanggal', 'like', '%' . $tanggal . '%')->get()->groupBy('waktu') as $key => $data)
                                         <tr style="page-break-before: always;">
                                             {{-- {{ $data->count() + 1 }} --}}
                                             <td rowspan="{{ $data->count() + 1 }}">{{ $key }}</td>
