@@ -43,14 +43,18 @@
                                 <h4 class="m-2">Nama Balita : {{ $daftarBalita->namaBalita }}</h4>
                                 <h4 class="m-2">Petugas : {{ auth()->User()->name }}</h4>
                                 <div class="m-2 form-floating">
-                                    <select class="form-select" id="floatingSelect" aria-label="tanggal pelasksanaan">
-                                        <option selected>Pilih Tanggal Pelaksanaan</option>
-                                        @foreach ($daftarBalita->foodRecall()->get()->groupBy('tanggal') as $key => $data)
-                                            <option value="{{ $key }}"
-                                                @if ($key == $tanggal) selected @endif>{{ $key }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    <form action="" method="get">
+                                        <select class="form-select" id="floatingSelect" aria-label="tanggal pelasksanaan"
+                                            onchange="">
+                                            <option selected>Pilih Tanggal Pelaksanaan</option>
+                                            @foreach ($daftarBalita->foodRecall()->get()->groupBy('tanggal') as $key => $data)
+                                                <option value="{{ $key }}"
+                                                    @if ($key == $tanggal) selected @endif>{{ $key }}
+                                                    onchange="this.form.submit()"
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </form>
                                     <label for="floatingSelect">Tanggal Pelaksanaan :</label>
                                 </div>
                                 <thead>
