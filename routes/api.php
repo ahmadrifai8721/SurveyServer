@@ -45,17 +45,16 @@ Route::post(
             ->first();
         // dump(User::all());
         if ($send) {
+            $send = [
+                "uuid" => $send->uuid,
+                "name" => $send->name,
+                "namaPosyandu" => $send->posyandu->nama,
+                "created_at" => $send->created_at,
+            ];
             return response()->json([$send]);
         } else {
             return response()->json(["AUTH" => "Gagal Login"], 403);
         }
-        // $send = [
-        //     "uuid" => $send->uuid,
-        //     "name" => $send->name,
-        //     "namaPosyandu" => $send->posyandu->nama,
-        //     "created_at" => $send->created_at,
-        // ];
-        // return response()->json([$send]);
     }
 );
 Route::post(
