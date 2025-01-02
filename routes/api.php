@@ -152,7 +152,7 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
             return response()->json([$send]);
         });
         route::get("/", function (Request $request) {
-            // return $request->uuid;
+            return $request->uuid;
             return view("foodRecallAndro", [
                 "pageTitle" => "Food Recal Report",
                 "foodRecall" => foodRecall::where("users_id", $request->uuid)->get()
