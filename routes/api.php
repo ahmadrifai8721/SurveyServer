@@ -48,7 +48,7 @@ Route::post(
             $send = [
                 "uuid" => $send->uuid,
                 "name" => $send->name,
-                "namaPosyandu" => $send->posyandu->nama,
+                "namaPosyandu" => $send->posyandu === null ? "posyandu belum dipilih" : $send->posyandu->namaPosyandu,
                 "created_at" => $send->created_at,
             ];
             return response()->json([$send]);
