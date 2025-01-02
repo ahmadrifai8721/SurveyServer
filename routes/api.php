@@ -168,9 +168,9 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
             }
         });
         route::get("/cetak{daftarBalita}", function (daftarBalita $daftarBalita, Request $request) {
-
+            dd($request->tanggal);
             return view("foodRecallCetakAndro", [
-                "pageTitle" => "Food Recal Report $request->tanggal",
+                "pageTitle" => "Food Recal Report ",
                 // "tableKomposisiPangan" => new tableKomposisiPangan:class,
                 "daftarBalita" => $daftarBalita,
                 "uuid" => $request->uuid,
