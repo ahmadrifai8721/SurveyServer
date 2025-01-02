@@ -174,7 +174,7 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
                 // "tableKomposisiPangan" => new tableKomposisiPangan:class,
                 "daftarBalita" => $daftarBalita,
                 "uuid" => $request->uuid,
-                "tanggal" => $request->tanggal ? date("j-m-Y", strtotime($request->tanggal)) : null,
+                "tanggal" => $request->tanggal ? date("d-m-Y", strtotime($request->tanggal)) : null,
                 "tanggal1" => date("Y-m-d", strtotime($request->tanggal))
             ]);
         })->name("foodRecallCetakAndro");
