@@ -155,7 +155,7 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
             // return $request->uuid;
             // dd(User::where("uuid", $request->uuid)->first()->admin);
             if (User::where("uuid", $request->uuid)->first()->admin) {
-                return view("foodRecallAndro", [
+                return view("foodR ecallAndro", [
                     "pageTitle" => "Food Recal Report Administratro",
                     "foodRecall" => foodRecall::all()->sortByDesc("created_at")
                 ]);

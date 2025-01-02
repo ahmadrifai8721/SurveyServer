@@ -27,6 +27,9 @@
             <div class="col-3">
                 <button class="btn btn-primary" type="submit"><i class=" ri-printer-fill"></i>
                     Cetak</button>
+                <a class="btn btn-secondary" href="{{ route('foodRecallExport', $date) }}" wire:model='date'><i
+                        class=" ri-download-cloud-2-fill"></i>
+                    Export To Excel</a>
             </div>
         </div>
     </form>

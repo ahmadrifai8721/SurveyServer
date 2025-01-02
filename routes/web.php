@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\foodrecallExport;
 use App\Http\Controllers\Administrator;
 use App\Http\Controllers\daftarBalitaController;
 use App\Http\Controllers\Dashboard;
@@ -91,6 +92,11 @@ Route::post('/clearBalita', function () {
 Route::prefix("/admin")->middleware("auth")->group(
     function () {
         Route::resource('server', Administrator::class)->names("Administrator");
+        Route::get('foodRecallExport{tanggal}', function (string $date) {
+            $date = date("Y-m-d", strtotime($date));
+            // dd((new foodrecallExport)->tanggal($this->date)->download('foodrecall.xlsx'));
+            return (new foodrecallExport)->tanggal($date)->download("foodrecall-$date.xlsx");
+        })->name("foodRecallExport");
         Route::resource('posyandu', posyanduController::class);
         Route::get("logout", function (Request $request) {
             Auth::logout();

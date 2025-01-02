@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Exports\foodrecallExport;
 use App\Models\foodRecall;
 use Livewire\Component;
 
@@ -15,14 +16,15 @@ class GenerateReportFoodRecall extends Component
     {
         $this->foodRecall = foodRecall::all();
         $this->date =
-            date("Y-m-d", strtotime(now()));;
+            date("d-m-Y", strtotime(now()));;
     }
 
     public function filterData()
     {
-        $this->date = date("Y-m-d", strtotime($this->date));
+        $this->date = date("d-m-Y", strtotime($this->date));
 
-        $data = foodRecall::where("created_at", 'like', "%" . $this->date . "%")->get();
+        $data = foodRecall::where("tanggal", 'like', "%" . $this->date . "%")->get();
+        // dd($this->date);
         if ($data->isEmpty()) {
             # code...
             $this->foodRecall = $data;
