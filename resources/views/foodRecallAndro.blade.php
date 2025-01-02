@@ -22,7 +22,7 @@
                             {!! '<strong>' .
                                 $result->waktu .
                                 '</strong> ' .
-                                $result->created_at .
+                                $result->tanggal .
                                 '( ' .
                                 $result->created_at->diffForHumans() .
                                 ' )' !!}
