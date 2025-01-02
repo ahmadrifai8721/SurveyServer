@@ -40,7 +40,7 @@
             @php
                 $totalEnergi = 0;
             @endphp
-            {{-- @dump($tanggal) --}}
+            @dump($daftarBalita->foodRecall->groupBy('tanggal'))
             @foreach ($tanggal ? $daftarBalita->foodRecall->where('tanggal', $tanggal)->groupBy('waktu') : $daftarBalita->foodRecall->groupBy('waktu') as $key => $data)
                 <tr style="page-break-before: always;">
                     {{-- {{ $data->count() + 1 }} --}}
