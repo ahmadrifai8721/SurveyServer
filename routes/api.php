@@ -153,10 +153,19 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
         });
         route::get("/", function (Request $request) {
             // return $request->uuid;
-            return view("foodRecallAndro", [
-                "pageTitle" => "Food Recal Report",
-                "foodRecall" => foodRecall::where("users_id", $request->uuid)->get()
-            ]);
+            // dd(User::where("uuid", $request->uuid)->first()->admin);
+            if (User::where("uuid", $request->uuid)->first()->admin) {
+                return view("foodRecallAndro", [
+                    "pageTitle" => "Food Recal Report Administratro",
+                    "foodRecall" => foodRecall::all()->sortByDesc("created_at")
+                ]);
+            } else {
+
+                return view("foodRecallAndro", [
+                    "pageTitle" => "Food Recal Report",
+                    "foodRecall" => foodRecall::where("users_id", $request->uuid)->get()
+                ]);
+            }
         });
         route::get("/cetak{daftarBalita}", function (daftarBalita $daftarBalita, Request $request) {
 

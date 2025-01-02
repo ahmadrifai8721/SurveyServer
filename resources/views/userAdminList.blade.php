@@ -159,6 +159,13 @@
                                     name="password">
                                 <label for="password">Password</label>
                             </div>
+                            <div class="mb-3 form-floating">
+                                <select name="admin" id="Addadmin" class="form-select select2">
+                                    <option value="0">Users</option>
+                                    <option value="1">Administrator</option>
+                                </select>
+                                <label for="Admin">Role User</label>
+                            </div>
                             <div class="gap-2 d-grid ">
                                 <button class="btn btn-primary" type="submit">Simpan</button>
                             </div>
@@ -179,6 +186,7 @@
                                         <tr class="text-capitalize">
                                             <th>nama</th>
                                             <th>email</th>
+                                            <th>Role</th>
                                             <th>posyandu</th>
                                             <th>Actions</th>
                                         </tr>
@@ -189,6 +197,7 @@
                                             <tr>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->email }}</td>
+                                                <td>{{ $item->admin == true ? 'Administrator' : 'User' }}</td>
                                                 <td>{{ $item->posyandu_id == null ? 'Posyandu belum di pilih' : $item->posyandu->nama }}
                                                 </td>
                                                 <td>
@@ -244,6 +253,12 @@
                                                                 <input type="text" class="form-control"
                                                                     value="{{ $item->email }}" readonly>
                                                                 <label for="email">Email address</label>
+                                                            </div>
+                                                            <div class="mb-3 form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    value="{{ $item->admin ? 'Administrator' : 'User' }}"
+                                                                    readonly>
+                                                                <label for="Role">Role</label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -303,6 +318,18 @@
                                                                         name="password" value="{{ $item->password }}">
                                                                     <label for="password">Password</label>
                                                                 </div>
+                                                                <div class="mb-3 form-floating">
+                                                                    <select name="admin" id="Addadmin"
+                                                                        class="form-select select2">
+                                                                        <option value="0"
+                                                                            @if ($item->admin == 0) selected @endif>
+                                                                            Users</option>
+                                                                        <option value="1"
+                                                                            @if ($item->admin == 1) selected @endif>
+                                                                            Administrator</option>
+                                                                    </select>
+                                                                    <label for="Admin">Role User</label>
+                                                                </div>
                                                                 <div class="gap-2 d-grid ">
                                                                     <button class="btn btn-primary"
                                                                         type="submit">Simpan</button>
@@ -322,7 +349,8 @@
                                         <tr class="text-capitalize">
                                             <th>nama</th>
                                             <th>email</th>
-                                            {{-- <th>posyandu</th> --}}
+                                            <th>Role</th>
+                                            <th>posyandu</th>
                                             <th>Actions</th>
                                         </tr>
                                     </tfoot>
