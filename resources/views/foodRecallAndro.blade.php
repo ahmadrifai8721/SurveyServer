@@ -7,6 +7,7 @@
         <table id="fixed-header-datatable" class="table table-striped dt-responsive nowrap w-100 text-capitalize">
             <thead>
                 <tr>
+                    <th>No</th>
                     <th>Nama Balita</th>
                     <th>Petugas</th>
                     <th>Tanggal Pelaksanaan</th>
@@ -16,6 +17,7 @@
             <tbody>
                 @forelse ($foodRecall as $result)
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $result->daftarBalita->namaBalita }}</td>
                         <td>{{ $result->penyuluh->name }}</td>
                         <td>
@@ -29,7 +31,7 @@
                         </td>
                         <td>
                             <a
-                                href="{{ route('foodRecallCetakAndro', $result->daftarBalita->id) . '/?uuid=' . $result->penyuluh->uuid.'&tanggal='.$result->tanggal }}">
+                                href="{{ route('foodRecallCetakAndro', $result->daftarBalita->id) . '/?uuid=' . $result->penyuluh->uuid . '&tanggal=' . $result->tanggal }}">
                                 <span class="badge badge-info bg-info">Cetak</span>
                             </a>
 
