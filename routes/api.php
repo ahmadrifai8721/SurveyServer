@@ -163,7 +163,7 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
 
                 return view("foodRecallAndro", [
                     "pageTitle" => "Food Recal Report",
-                    "foodRecall" => foodRecall::where("users_id", $request->uuid)->get()
+                    "foodRecall" => foodRecall::where("users_id", $request->uuid)->get()->sortByDesc("created_at")
                 ]);
             }
         });
