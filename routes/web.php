@@ -75,7 +75,7 @@ Route::post('/foodRecallGenerate', function (Request $request) {
             $data[$key1] = $value1->first()->daftarBalita;
         }
     }
-    return $data;
+    // return $data;
     return view("layout.template-cetak", [
         "pageTitle" => "Food Recal Report Generate | " . Carbon::parse($tanggal)->isoFormat("DD MMMM YYYY"),
         "dataPerTanggal" => $data,
