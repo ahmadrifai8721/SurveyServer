@@ -68,14 +68,14 @@ Route::post('/foodRecallGenerate', function (Request $request) {
     $foodRecall = foodRecall::where("tanggal", $tanggal)->get()->groupBy("tanggal");
     $data = [];
     $i = 1;
-    dump($foodRecall);
+    // dump($foodRecall);
     foreach ($foodRecall as $key => $value) {
         foreach ($value->groupBy("daftar_balita_id") as $key1 => $value1) {
             # code...
             $data[$key1] = $value1->first()->daftarBalita;
         }
     }
-    // return $data;
+    return $data;
     return view("layout.template-cetak", [
         "pageTitle" => "Food Recal Report Generate | " . Carbon::parse($tanggal)->isoFormat("DD MMMM YYYY"),
         "dataPerTanggal" => $data,
