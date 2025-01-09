@@ -62,11 +62,26 @@ Route::get('/foodRecallCetak{daftarBalita}', function (daftarBalita $daftarBalit
     ]);
 })->name("foodRecallCetak")->middleware("auth");
 Route::get("foodBulan", function () {
-    return view("foodRecall", [
+
+    $data = [];
+
+    foreach (foodRecall::all()->groupBy("daftar_balita_id") as $idBalita => $dataByBalita) {
+        # code...
+        foreach ($dataByBalita->groupBy("tanggal") as $tanggal => $dataByTanggal) {
+            # code...
+            foreach ($dataByTanggal->groupBy("waktu") as $key => $value) {
+                # code...
+                $data[daftarBalita::find($idBalita)->namaBalita][$tanggal][$key] = $dataByTanggal;
+            }
+        }
+    }
+    // return $data;
+
+    return view("foodRecallBulan", [
         "pageTitle" => "Food Recal Report",
-        "foodRecall" => foodRecall::all()
+        "foodRecall" => daftarBalita::all()
     ]);
-});
+})->name("cetakBulan");
 Route::post('/foodRecallGenerate', function (Request $request) {
     // dump($request->input('Tanggal'));
     $tanggal = $request->input('Tanggal');

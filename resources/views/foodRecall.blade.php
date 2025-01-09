@@ -23,6 +23,7 @@
         <div class="my-2">
 
             <a href="{{ route('foodRecall.create') }}" class="btn btn-soft-primary"><strong>Buat laporan</strong></a>
+            <a href="{{ route('cetakBulan') }}" class="btn btn-soft-secondary"><strong>LIHAT PERBULAN</strong></a>
         </div>
 
         <div class="row">
