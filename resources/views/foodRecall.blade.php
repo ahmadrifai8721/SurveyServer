@@ -20,10 +20,10 @@
             </div>
         </div>
         <!-- end page title -->
-        {{-- <div class="my-2">
+        <div class="my-2">
 
             <a href="{{ route('foodRecall.create') }}" class="btn btn-soft-primary"><strong>Buat laporan</strong></a>
-        </div> --}}
+        </div>
 
         <div class="row">
             <div class="col-12">
@@ -32,7 +32,7 @@
                         <h4 class="header-title">Food Recal Report</h4>
                         <div class="tab-content">
                             <div class="tab-pane show active" id="fixed-header-preview">
-                                <table id="fixed-header-datatable"
+                                <table id="datatable-buttons"
                                     class="table table-striped dt-responsive nowrap w-100 text-capitalize">
                                     <thead>
                                         <tr>

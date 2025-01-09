@@ -16,12 +16,12 @@ class GenerateReportFoodRecall extends Component
     {
         $this->foodRecall = foodRecall::all();
         $this->date =
-            date("d-m-Y", strtotime(now()));;
+            date("j-m-Y", strtotime(now()));;
     }
 
     public function filterData()
     {
-        $this->date = date("d-m-Y", strtotime($this->date));
+        $this->date = date("j-m-Y", strtotime($this->date));
 
         $data = foodRecall::where("tanggal", 'like', "%" . $this->date . "%")->get();
         // dd($this->date);

@@ -79,6 +79,7 @@
                         <li>
                             <a href="{{ route('foodRecall.index') }}"> Food Recal Report</a>
                         </li>
+
                         <li>
                             <a href="{{ route('daftarBalita.index') }}">Daftar Balita</a>
                         </li>
