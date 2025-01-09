@@ -61,6 +61,12 @@ Route::get('/foodRecallCetak{daftarBalita}', function (daftarBalita $daftarBalit
         "daftarBalita" => $daftarBalita
     ]);
 })->name("foodRecallCetak")->middleware("auth");
+Route::get("foodBulan", function () {
+    return view("foodRecall", [
+        "pageTitle" => "Food Recal Report",
+        "foodRecall" => foodRecall::all()
+    ]);
+});
 Route::post('/foodRecallGenerate', function (Request $request) {
     // dump($request->input('Tanggal'));
     $tanggal = $request->input('Tanggal');
