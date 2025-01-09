@@ -16,7 +16,7 @@ class GenerateReportFoodRecall extends Component
     {
         $this->foodRecall = foodRecall::all();
         $this->date =
-            date("j-m-Y", strtotime(now()));;
+            date("j-m-Y", strtotime(now()));
     }
 
     public function filterData()

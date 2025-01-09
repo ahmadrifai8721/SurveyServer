@@ -62,8 +62,9 @@ Route::get('/foodRecallCetak{daftarBalita}', function (daftarBalita $daftarBalit
     ]);
 })->name("foodRecallCetak")->middleware("auth");
 Route::post('/foodRecallGenerate', function (Request $request) {
-    dump($request->input('Tanggal'));
+    // dump($request->input('Tanggal'));
     $tanggal = $request->input('Tanggal');
+    $tanggal = date("j-m-Y", strtotime($tanggal));
     $foodRecall = foodRecall::where("tanggal", 'like', "%" . $tanggal . "%")->get()->groupBy("created_at");
     $data = [];
     $i = 1;
