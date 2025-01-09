@@ -64,11 +64,9 @@ Route::get('/foodRecallCetak{daftarBalita}', function (daftarBalita $daftarBalit
 Route::post('/foodRecallGenerate', function (Request $request) {
     // dump($request->input('Tanggal'));
     $tanggal = $request->input('Tanggal');
-    $tanggal = date("j-m-Y", strtotime($tanggal));
-    $foodRecall = foodRecall::where("tanggal", $tanggal)->get()->groupBy("tanggal");
+    $foodRecall = foodRecall::where("created_at", 'like', "%" . $tanggal . "%")->get()->groupBy("created_at");
     $data = [];
     $i = 1;
-    // dump($foodRecall);
     foreach ($foodRecall as $key => $value) {
         foreach ($value->groupBy("daftar_balita_id") as $key1 => $value1) {
             # code...
