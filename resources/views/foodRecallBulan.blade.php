@@ -82,7 +82,8 @@
                                         @forelse ($foodRecall as $idBalita => $dataBalita)
                                             @if ($dataBalita->foodRecall->count() >= 1)
                                                 <tr>
-                                                    <td class="p-0" style=" font-size: 0.5vw">{{ $dataBalita->namaBalita }}</td>
+                                                    <td class="p-0" style=" font-size: 0.5vw">
+                                                        {{ $dataBalita->namaBalita }}</td>
                                                     <td class="p-0" style=" font-size: 0.5vw">
                                                         {{ $dataBalita->foodRecall->first()->penyuluh->name }}</td>
                                                     @for ($i = 1; $i < 33; $i++)
@@ -92,7 +93,9 @@
                                                                     <li>
                                                                         {{ $waktu }} : {{ $item->sum('urt') }}
                                                                     </li>
-                                                                @endforeach
+                                                                    @endforeach
+                                                                    <strong>Total :
+                                                                        {{ $dataBalita->foodRecall->where('tanggal', "$i-12-2024")->sum('urt') }}</strong>
                                                             </ul>
                                                         </td>
                                                     @endfor

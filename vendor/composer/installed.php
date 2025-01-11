@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '6dd71b3a7d781c58b7763cf38d25ec1e77217586',
+        'reference' => 'ecaa2c6216cf59be95e9188a91c57c983730a276',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -400,7 +400,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '6dd71b3a7d781c58b7763cf38d25ec1e77217586',
+            'reference' => 'ecaa2c6216cf59be95e9188a91c57c983730a276',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -461,9 +461,9 @@
             'dev_requirement' => false,
         ),
         'league/commonmark' => array(
-            'pretty_version' => '2.5.3',
-            'version' => '2.5.3.0',
-            'reference' => 'b650144166dfa7703e62a22e493b853b58d874b0',
+            'pretty_version' => '2.6.1',
+            'version' => '2.6.1.0',
+            'reference' => 'd990688c91cedfb69753ffc2512727ec646df2ad',
             'type' => 'library',
             'install_path' => __DIR__ . '/../league/commonmark',
             'aliases' => array(),
@@ -656,9 +656,9 @@
             'dev_requirement' => true,
         ),
         'phpoffice/phpspreadsheet' => array(
-            'pretty_version' => '1.29.5',
-            'version' => '1.29.5.0',
-            'reference' => '727cb704d5479fe4ddc291497ee471c4ec08f1b6',
+            'pretty_version' => '1.29.7',
+            'version' => '1.29.7.0',
+            'reference' => '02c8625411dcb96e1f63d58c47460284e15b2e80',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpoffice/phpspreadsheet',
             'aliases' => array(),
@@ -719,9 +719,9 @@
             'dev_requirement' => true,
         ),
         'phpunit/phpunit' => array(
-            'pretty_version' => '10.5.38',
-            'version' => '10.5.38.0',
-            'reference' => 'a86773b9e887a67bc53efa9da9ad6e3f2498c132',
+            'pretty_version' => '10.5.40',
+            'version' => '10.5.40.0',
+            'reference' => 'e6ddda95af52f69c1e0c7b4f977cccb58048798c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/phpunit',
             'aliases' => array(),
@@ -829,8 +829,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '3.0.0',
+                0 => '3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(
