@@ -69,12 +69,16 @@ Route::get("foodBulan", function () {
         # code...
         foreach ($dataByBalita->groupBy("tanggal") as $tanggal => $dataByTanggal) {
             # code...
-            foreach ($dataByTanggal->groupBy("waktu") as $key => $value) {
+            if (strtotime($tanggal) >= strtotime("1-12-2024") && strtotime($tanggal) <= strtotime("31-12-2024")) {
                 # code...
-                $data[daftarBalita::find($idBalita)->namaBalita][$tanggal][$key] = $dataByTanggal;
+                foreach ($dataByTanggal->groupBy("waktu") as $key => $value) {
+                    # code...
+                    $data[daftarBalita::find($idBalita)->namaBalita][$tanggal][$key] = $dataByTanggal;
+                }
             }
         }
     }
+    // dump($data);
     // return $data;
 
     return view("foodRecallBulan", [

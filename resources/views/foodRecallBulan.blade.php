@@ -86,17 +86,19 @@
                                                         {{ $dataBalita->namaBalita }}</td>
                                                     <td class="p-0" style=" font-size: 0.5vw">
                                                         {{ $dataBalita->foodRecall->first()->penyuluh->name }}</td>
-                                                    @for ($i = 1; $i < 33; $i++)
+                                                    @for ($i = 1; $i < 32; $i++)
                                                         <td class="p-0" style=" font-size: 0.5vw">
                                                             <ul>
                                                                 @foreach ($dataBalita->foodRecall->where('tanggal', "$i-12-2024")->groupBy('waktu') as $waktu => $item)
                                                                     <li>
                                                                         {{ $waktu }} : {{ $item->sum('urt') }}
                                                                     </li>
-                                                                    @endforeach
-                                                                    <strong>Total :
-                                                                        {{ $dataBalita->foodRecall->where('tanggal', "$i-12-2024")->sum('urt') }}</strong>
+                                                                @endforeach
                                                             </ul>
+                                                            <strong>
+                                                                Total {{ $i }}:
+                                                                {{ $dataBalita->foodRecall->where('tanggal', "$i-12-2024")->sum('urt') }}
+                                                            </strong>
                                                         </td>
                                                     @endfor
                                                 </tr>
