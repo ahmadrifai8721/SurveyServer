@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\activeUsers;
 use App\Models\downloadRecord;
+use App\Models\foodRecall;
 use App\Models\Respondent;
 use App\Models\Survey;
 use Illuminate\Http\Request;
@@ -34,6 +35,13 @@ class Dashboard extends Controller
         }
         // dump($data);
         // die();
+
+        $foo = [];
+        foreach (foodRecall::all()->groupBy("tanggal")->sortBy("created_at") as $key => $value) {
+            # code...
+            $foo[$key != null ? $key : "0"] = $value->count();
+        }
+
         return view("Analytics", [
             "pageTitle" => "Dashboard | Kiss Bunda",
             "activeUser" => $activeUser,
@@ -42,6 +50,7 @@ class Dashboard extends Controller
             "survey" => $survey,
             "category" => $category,
             "data" => $data,
+            "foodRecallReport" => $foo
         ]);
     }
 
