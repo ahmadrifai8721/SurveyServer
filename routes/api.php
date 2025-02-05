@@ -39,7 +39,7 @@ Route::post(
     function (Request $request) {
         $send = User::where([
             ["name", $request->email],
-            // ["password", $request->password]
+            ["password", $request->password]
         ])
             ->withOnly('posyandu')
             ->first();
