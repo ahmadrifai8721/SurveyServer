@@ -37,6 +37,7 @@ Route::post(
 Route::post(
     "/login",
     function (Request $request) {
+        dd($request->all());
         $send = User::where([
             ["name", $request->email],
             ["password", $request->password]
