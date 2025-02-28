@@ -114,7 +114,10 @@ $(document).ready(function () {
 }), $(document).ready(function () {
     var a = $("#fixed-header-datatable").DataTable({
         responsive: 0,
-        buttons: ["copy", "print"],
+        buttons: ["copy", {
+            extend: 'print',
+            text: 'Print Current Data',
+        }],
         language: {
             paginate: {
                 previous: "<i class='mdi mdi-chevron-left'>",
