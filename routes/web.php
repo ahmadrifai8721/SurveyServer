@@ -114,7 +114,7 @@ Route::get("foodBulan/{bulan}-{tahun}", function ($bulan, $tahun) {
         "tahun" => $tahun,
         "foodRecall" => daftarBalita::all()
     ]);
-})->name("cetakBulan");
+})->name("cetakBulanSet");
 Route::post('/foodRecallGenerate', function (Request $request) {
     // dump($request->input('Tanggal'));
     $tanggal = $request->input('Tanggal');
