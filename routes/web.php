@@ -82,7 +82,7 @@ Route::get("foodBulan", function () {
     // return $data;
 
     return view("foodRecallBulan", [
-        "pageTitle" => "Food Recal Report Bulan Date('m') tahun Date('Y')",
+        "pageTitle" => "Food Recal Report Bulan " . Date('m') . " tahun " . Date('Y'),
         "bulan" => Date("m"),
         "tahun" => date("Y"),
         "foodRecall" => daftarBalita::all()
