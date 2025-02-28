@@ -64,6 +64,8 @@ Route::get('/foodRecallCetak{daftarBalita}', function (daftarBalita $daftarBalit
 Route::get("foodBulan", function () {
 
     $data = [];
+    $bulan = Date("j");
+    $tahun = Date("Y");
 
     foreach (foodRecall::all()->groupBy("daftar_balita_id") as $idBalita => $dataByBalita) {
         # code...
@@ -82,9 +84,9 @@ Route::get("foodBulan", function () {
     // return $data;
 
     return view("foodRecallBulan", [
-        "pageTitle" => "Food Recal Report Bulan " . Date('m') . " tahun " . Date('Y'),
-        "bulan" => Date("m"),
-        "tahun" => date("Y"),
+        "pageTitle" => "Food Recal Report Bulan $bulan tahun $tahun",
+        "bulan" => $bulan,
+        "tahun" => $tahun,
         "foodRecall" => daftarBalita::all()
     ]);
 })->name("cetakBulan");
