@@ -13,7 +13,13 @@ $(document).ready(function () {
     });
     var a = $("#datatable-buttons").DataTable({
         lengthChange: !1,
-        buttons: ["copy", "print", 'excel', 'pdf'],
+        buttons: ["copy",
+            {
+                extend: 'print',
+                text: 'Print current data',
+            },
+            'excel', 'pdf'
+        ],
         language: {
             paginate: {
                 previous: "<i class='mdi mdi-chevron-left'>",
@@ -114,10 +120,7 @@ $(document).ready(function () {
 }), $(document).ready(function () {
     var a = $("#fixed-header-datatable").DataTable({
         responsive: 0,
-        buttons: ["copy", {
-            extend: 'print',
-            text: 'Print Current Data',
-        }],
+        buttons: ["copy", "print"],
         language: {
             paginate: {
                 previous: "<i class='mdi mdi-chevron-left'>",
