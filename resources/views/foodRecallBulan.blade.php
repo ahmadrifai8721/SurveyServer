@@ -15,7 +15,7 @@
                             <li class="breadcrumb-item active">Food Recal Report</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Food Recal Report</h4>
+                    <h4 class="page-title">{{ $pageTitle }}</h4>
                 </div>
             </div>
         </div>
