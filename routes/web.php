@@ -82,13 +82,13 @@ Route::get("foodBulan", function () {
     // return $data;
 
     return view("foodRecallBulan", [
-        "pageTitle" => "Food Recal Report",
+        "pageTitle" => "Food Recal Report Bulan Date('m') tahun Date('Y')",
         "bulan" => Date("m"),
         "tahun" => date("Y"),
         "foodRecall" => daftarBalita::all()
     ]);
 })->name("cetakBulan");
-Route::get("foodBulan/{bulan}-{tahun}", function () {
+Route::get("foodBulan/{bulan}-{tahun}", function ($bulan, $tahun) {
 
     $data = [];
 
@@ -109,9 +109,9 @@ Route::get("foodBulan/{bulan}-{tahun}", function () {
     // return $data;
 
     return view("foodRecallBulan", [
-        "pageTitle" => "Food Recal Report",
-        "bulan" => 2,
-        "tahun" => 2024,
+        "pageTitle" => "Food Recal Report Bulan $bulan tahun $tahun",
+        "bulan" => $bulan,
+        "tahun" => $tahun,
         "foodRecall" => daftarBalita::all()
     ]);
 })->name("cetakBulan");
