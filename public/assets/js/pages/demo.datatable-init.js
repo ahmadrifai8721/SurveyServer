@@ -13,6 +13,7 @@ $(document).ready(function () {
     });
     var a = $("#datatable-buttons").DataTable({
         lengthChange: !1,
+        dom: 'Bfrtip',
         buttons: ["copy",
             {
                 extend: 'print',
