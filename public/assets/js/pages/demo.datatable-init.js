@@ -17,6 +17,7 @@ $(document).ready(function () {
             {
                 extend: 'print',
                 text: 'Print current data',
+                title: document.title,
             },
             'excel', 'pdf'
         ],
