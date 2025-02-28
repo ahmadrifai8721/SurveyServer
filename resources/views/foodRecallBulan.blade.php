@@ -96,8 +96,9 @@
                                                                 @endforeach
                                                             </ul>
                                                             <strong>
+                                                                @dump($dataBalita->foodRecall->where('tanggal', "$i-$bulan-$tahun")->sum('urt'))
                                                                 Total:
-                                                                {{ $dataBalita->foodRecall->where('tanggal', "$i-$bulan-2024")->sum('urt') }}
+                                                                {{ $dataBalita->foodRecall->where('tanggal', "$i-$bulan-$tahun")->sum('urt') }}
                                                             </strong>
                                                         </td>
                                                     @endfor
