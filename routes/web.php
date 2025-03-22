@@ -13,7 +13,6 @@ use App\Models\foodRecall;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -117,6 +116,38 @@ Route::get("foodBulan/{bulan}-{tahun}", function ($bulan, $tahun) {
         "foodRecall" => daftarBalita::all()
     ]);
 })->name("cetakBulanSet");
+Route::get("foodBulan/{bulanStart}-{tahunStart}/{bulanLast}-{tahunLast}", function ($bulanStart, $tahunStart, $bulanLast, $tahunLast) {
+
+    $data = [];
+
+    foreach (foodRecall::all()->groupBy("daftar_balita_id") as $idBalita => $dataByBalita) {
+        # code...
+        foreach ($dataByBalita->groupBy("tanggal") as $tanggal => $dataByTanggal) {
+            # code...
+            if (strtotime($tanggal) >= strtotime("1-$bulanStart-$tahunStart") && strtotime($tanggal) <= strtotime("31-$bulanLast-$tahunLast")) {
+                # code...
+                foreach ($dataByTanggal->groupBy("waktu") as $key => $value) {
+                    # code...
+                    // dd());
+                    $data[daftarBalita::find($idBalita)->namaBalita . "/" . foodRecall::where("daftar_balita_id", $idBalita)->first()->penyuluh->name][Date("j", strtotime($tanggal))][$key] = $value->sum("urt");
+                }
+            }
+        }
+    }
+
+
+    // dd($dataBalita);
+    // dump($data);
+    // return $data;
+
+
+    return view("foodRecallBulanrange", [
+        "pageTitle" => "Food Recal Report Bulan $bulanStart tahun $tahunStart - $bulanLast tahun $tahunLast",
+        // "bulan" => $bulan,
+        // "tahun" => $tahun,
+        "foodRecall" => $data
+    ]);
+})->name("cetakBulanSetRange");
 Route::post('/foodRecallGenerate', function (Request $request) {
     // dump($request->input('Tanggal'));
     $tanggal = $request->input('Tanggal');
