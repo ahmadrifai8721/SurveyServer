@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\FoodRecallController;
 use App\Http\Controllers\MateriAppController;
 use App\Http\Controllers\posyanduController;
+use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\UsersList;
 use App\Models\daftarBalita;
 use App\Models\foodRecall;
@@ -48,7 +49,8 @@ route::post("/login", function (Request $request) {
 
 
 Route::get('/', [Dashboard::class, 'index'])->name('home')->middleware("auth");
-Route::get('/SurveyList', [Dashboard::class, 'survey'])->name('survey')->middleware("auth");
+Route::get('/SurveyList', [SurveyController::class, 'index'])->name('survey')->middleware("auth");
+Route::get('/SurveyList/print', [SurveyController::class, 'print'])->name('survey.filter')->middleware("auth");
 Route::resource('/respondent', UsersList::class)->middleware("auth");
 Route::resource('/foodRecall', FoodRecallController::class)->middleware("auth");
 

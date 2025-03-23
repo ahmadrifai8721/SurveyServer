@@ -53,12 +53,4 @@ class Dashboard extends Controller
             "foodRecallReport" => $foo
         ]);
     }
-
-    public function survey()
-    {
-        return view("surveyList", [
-            "pageTitle" => "Daftar Hasil Survey| Kiss Bunda",
-            "survey" => Survey::all()->sortBy("tanggal"),
-        ]);
-    }
 }

@@ -12,7 +12,7 @@
                         <ol class="m-0 breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript: void(0);">Kiss Bunda</a></li>
                             <li class="breadcrumb-item"><a href="javascript: void(0);">User</a></li>
-                            <li class="breadcrumb-item active">Food Recal Report</li>
+                            <li class="breadcrumb-item active">Survey Report</li>
                         </ol>
                     </div>
                     <h4 class="page-title">{{ $pageTitle }}</h4>
@@ -30,7 +30,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Food Recal Report</h4>
+                        <h4 class="header-title">Survey Report</h4>
                         <div class="tab-content">
                             <div class="tab-pane show active" id="fixed-header-preview">
                                 <table id="datatable-buttons"
@@ -38,11 +38,11 @@
                                     <thead style=" font-size: 0.5vw">
                                         <tr>
                                             <th style=" font-size: 0.5vw" class="text-center align-middle" rowspan="2">
-                                                Nama Balita</th>
-                                            <th style=" font-size: 0.5vw" class="text-center align-middle" rowspan="2">
-                                                Petugas</th>
+                                                Tingkat Kepuasan</th>
                                             <th style=" font-size: 0.5vw" class="text-center align-middle" colspan="31">
                                                 Tanggal</th>
+                                            <th style=" font-size: 0.5vw" class="text-center align-middle" rowspan="2">
+                                                Total</th>
                                         </tr>
                                         <tr>
                                             <th style=" font-size: 0.5vw">1</th>
@@ -79,75 +79,54 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($foodRecall as $idBalita => $dataBalitaRandom)
-                                            @php
-                                                $dataBalita = collect($dataBalitaRandom)->sortKeys();
-                                            @endphp
-                                            {{-- @dump($dataBalita) --}}
+                                        @foreach ($data as $key => $item)
                                             <tr>
-                                                <td class="p-0" style=" font-size: 0.5vw">
-                                                    {{ explode('/', $idBalita)[0] }}</td>
-                                                <td class="p-0" style=" font-size: 0.5vw">
-                                                    {{ explode('/', $idBalita)[1] }}</td>
-                                                @for ($i = 1; $i <= 31; $i++)
-                                                    @php
-                                                        $total[$i] = 0;
-                                                    @endphp
-                                                    {{-- @dump($foodRecall) --}}
-                                                    @if ($dataBalita->has($i))
-                                                        <td class="p-0" style=" font-size: 0.5vw">
-                                                            <ul>
-                                                                @foreach ($dataBalita[$i] as $id => $data)
-                                                                    <li>{{ $id }} : {{ $data }}</li>
-                                                                    @php
-                                                                        $total[$i] += $data;
-                                                                    @endphp
-                                                                @endforeach
-                                                                <li><strong>Total : {{ $total[$i] }}</strong></li>
-                                                            </ul>
+                                                @switch($key)
+                                                    @case(1)
+                                                        <td><span class="badge badge-success-lighten">SANGAT PUAH</span>
+                                                        </td>
+                                                    @break
+
+                                                    @case(2)
+                                                        <td><span class="badge badge-warning-lighten">PUAS</span>
+                                                        </td>
+                                                    @break
+
+                                                    @case(3)
+                                                        <td><span class="badge badge-info-lighten">CUKUP PUAS</span>
+                                                        </td>
+                                                    @break
+
+                                                    @case(4)
+                                                        <td><span class="badge badge-danger-lighten">KURANG PUAS</span>
+                                                        </td>
+                                                    @break
+
+                                                    @default
+                                                        <td><span class="badge badge-dark-lighten">TIDAK TERNILAI</span>
+                                                        </td>
+                                                @endswitch
+                                                @for ($i = 1; $i < 32; $i++)
+                                                    @if ($item->has($i))
+                                                        <td style=" font-size: 0.5vw">
+                                                            {{ $item[$i]->count('tingkatKepuasan') }}
                                                         </td>
                                                     @else
-                                                        <td>
-                                                            <ul>
-                                                                <li>Pagi : 0</li>
-                                                                <li>Siang : 0</li>
-                                                                <li>Malam : 0</li>
-                                                                <li><strong>Total : 0</strong></li>
-                                                            </ul>
-                                                        </td>
+                                                        <td style=" font-size: 0.5vw">0</td>
                                                     @endif
                                                 @endfor
-                                                {{-- @foreach ($dataBalita as $id => $result)
-                                                    @if (count($result) > 0)
-                                                        @php
-                                                            $total[$id] = $total[$id] ?? 0;
-                                                            $total[$id] += count($result);
-                                                        @endphp
-                                                        <td>
-                                                            {{ count($result) }}
-                                                        </td>
-                                                    @else
-                                                        <td>
-                                                            0
-                                                        </td>
-                                                    @endif
-                                                @endforeach --}}
+                                                <td style=" font-size: 0.5vw">{{ $item->flatten()->count() }}</td>
                                             </tr>
-                                        @empty
-                                            <tr>
-                                                <td class="p-0" style=" font-size: 0.5vw" colspan="4">Data Masih
-                                                    Kosong</td>
-                                            </tr>
-                                        @endforelse
+                                        @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th style=" font-size: 0.5vw" class="text-center align-middle" rowspan="2">
-                                                Nama Balita</th>
-                                            <th style=" font-size: 0.5vw" class="text-center align-middle" rowspan="2">
-                                                Petugas</th>
+                                                Tingkat Kepuasan</th>
                                             <th style=" font-size: 0.5vw" class="text-center align-middle" colspan="31">
                                                 Tanggal</th>
+                                            <th style=" font-size: 0.5vw" class="text-center align-middle" rowspan="2">
+                                                Total</th>
                                         </tr>
                                         <tr>
                                             <th style=" font-size: 0.5vw">1</th>
