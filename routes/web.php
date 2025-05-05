@@ -202,3 +202,9 @@ Route::prefix("/admin")->middleware("auth")->group(
         });
     }
 );
+
+Route::get('privacy-policy', function () {
+    return view("privacy-policy", [
+        "pageTitle" => "Privacy Policy"
+    ]);
+})->name("privacy-policy");
