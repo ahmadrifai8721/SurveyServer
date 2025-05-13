@@ -56,14 +56,14 @@ class MateriAppController extends Controller
 
         $request->validate(
             [
-                'file_materi' => 'required|max:10240|unique:materi_apps,materi', // Ensure the file is a PDF, limit size to 10MB, and ensure uniqueness
+                'file_materi' => 'required|max:10240', // Ensure the file is a PDF, limit size to 10MB, and ensure uniqueness
                 'menu' => 'required|string|unique:materi_apps,menu', // Ensure the menu is a string, not empty, and unique
             ],
             [
                 'file_materi.required' => 'File materi tidak boleh kosong',
                 // 'file_materi.mimes' => 'File harus berupa PDF',
                 'file_materi.max' => 'Ukuran file tidak boleh lebih dari 10MB',
-                'file_materi.unique' => 'File sudah ada',
+                // 'file_materi.unique' => 'File sudah ada',
                 'menu.required' => 'Menu tidak boleh kosong',
                 'menu.string' => 'Menu harus berupa string',
                 'menu.unique' => 'Menu sudah ada',
