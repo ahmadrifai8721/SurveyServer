@@ -33,7 +33,7 @@ class MateriAppController extends Controller
         $data = [];
         foreach (MateriApp::all() as $key => $value) {
             $data[$value->menu] = [
-                "Materi_dir" => url(),
+                "Materi_dir" => url("/"),
                 "Materi_pic_list" => $value->materi_pic_list ? $value->materi_pic_list : [],
                 "Materi_pdf" => $value->materi_pdf,
                 "Materi_vid" => $value->materi_vid,
