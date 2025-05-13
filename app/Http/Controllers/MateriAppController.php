@@ -53,6 +53,7 @@ class MateriAppController extends Controller
     public function store(Request $request)
     {
         //
+        dd($request->hasFile('file_materi'));
 
         $request->validate(
             [
