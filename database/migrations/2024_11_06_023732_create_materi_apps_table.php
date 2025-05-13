@@ -50,8 +50,8 @@ return new class extends Migration
             $table->string("menu");
             $table->longText("materi");
             $table->json("materi_pic_list")->nullable();
-            $table->boolean("materi_pdf")->nullable();
-            $table->boolean("materi_vid")->nullable();
+            $table->longText("materi_pdf")->nullable();
+            $table->longText("materi_vid")->nullable();
             $table->string("cp")->nullable();
             $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
             $table->timestamps();
