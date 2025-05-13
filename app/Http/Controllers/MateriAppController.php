@@ -61,7 +61,7 @@ class MateriAppController extends Controller
             ],
             [
                 'file_materi.required' => 'File materi tidak boleh kosong',
-                'file_materi.mimes' => 'File harus berupa PDF',
+                // 'file_materi.mimes' => 'File harus berupa PDF',
                 'file_materi.max' => 'Ukuran file tidak boleh lebih dari 10MB',
                 'file_materi.unique' => 'File sudah ada',
                 'menu.required' => 'Menu tidak boleh kosong',
