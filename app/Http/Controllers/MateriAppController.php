@@ -34,7 +34,7 @@ class MateriAppController extends Controller
         foreach (MateriApp::all() as $key => $value) {
             $data[$value->menu] = [
                 "Materi_dir" => url($value->materi),
-                "Materi_pic_list" => $value->materi_pic_list,
+                "Materi_pic_list" => $value->materi_pic_list ? $value->materi_pic_list : [],
                 "Materi_pdf" => $value->materi_pdf,
                 "Materi_vid" => $value->materi_vid,
                 "cp" => $value->cp,
