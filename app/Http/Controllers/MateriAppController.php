@@ -53,7 +53,7 @@ class MateriAppController extends Controller
     public function store(Request $request)
     {
         //
-
+        dd($request->all());
         $request->validate(
             [
                 // 'file_materi' => 'required|mimes:pdf|max:10240|unique:materi_apps,materi', // Ensure the file is a PDF, limit size to 10MB, and ensure uniqueness
