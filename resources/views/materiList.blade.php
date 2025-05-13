@@ -235,8 +235,7 @@
                                                                     <label for="formFile" class="form-label">File
                                                                         Materi</label>
                                                                     <input class="form-control" type="file"
-                                                                        id="formFile" name="file_materi"
-                                                                        accept="image/png, image/jpeg">
+                                                                        id="formFile" name="file_materi" accept=".pdf">
                                                                 </div>
                                                                 <div class="gap-2 d-grid ">
                                                                     <button class="btn btn-primary"
