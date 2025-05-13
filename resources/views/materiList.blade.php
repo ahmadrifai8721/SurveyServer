@@ -11,121 +11,64 @@
                     <div class="page-title-right">
                         <ol class="m-0 breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript: void(0);">Kiss Bunda</a></li>
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">User</a></li>
-                            <li class="breadcrumb-item active">Admin</li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">APP</a></li>
+                            <li class="breadcrumb-item active">Materi</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Daftar admin</h4>
+                    <h4 class="page-title">Daftar Materi</h4>
                 </div>
             </div>
         </div>
         <!-- end page title -->
         <!-- Button trigger modal -->
-        <button type="button" class="mb-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahAdmin">
-            <i class="mdi mdi-account-plus-outline"></i> Buat Akun Baru
-        </button>
-        {{-- <button type="button" class="mb-2 btn btn-danger" data-bs-toggle="modal" data-bs-target="#daftarPosyandu">
-            <i class="mdi mdi-hospital-marker"></i> Daftar Posyandu
+        <button type="button" class="mb-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahMateri">
+            <i class="mdi mdi-account-plus-outline"></i> Buat Materi Baru
         </button>
 
-        <div class="modal fade" id="daftarPosyandu" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
-            role="dialog" aria-labelledby="daftarPosyanduTitle" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen modal-dialog-scrollable modal-dialog-centered modal-sm"
-                role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="daftarPosyanduTitle">
-                            Daftar Posyandu
-                        </h5>
-                        <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('posyandu.store') }}" enctype="multipart/form-data" method="post"
-                            class="col-md-3">
 
-                            @csrf
-
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Upload Template</label>
-                                <input class="form-control" type="file" id="formFile" name="posyandu">
-                            </div>
-                            <a href="{{ url('/assets/tempImportPosyandu.xlsx') }}" class="btn btn-secondary">Template Import
-                                Posyandu</a>
-                            <button class="btn btn-primary" type="submit">Import</button>
-                        </form>
-                        <table id="fixed-header-datatable" class="table table-striped dt-responsive nowrap w-100">
-                            <thead>
-                                <tr class="text-capitalize">
-                                    <th>nama</th>
-                                    <th>Alamat</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($posyandu as $item)
-                                    <tr>
-                                        <td>{{ $item->nama }}</td>
-                                        <td>{{ $item->alamat }}</td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="3" class="text-center">Data Posyandu Belum di Import</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                            <tfoot>
-                                <tr class="text-capitalize">
-                                    <th>nama</th>
-                                    <th>Alamat</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Kembali
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
-        {{-- model Tambah User --}}
-        <div class="modal fade" id="tambahAdmin" tabindex="-1" aria-labelledby="tambahAdminLabel" aria-hidden="true">
+        {{-- model Tambah materi --}}
+        <div class="modal fade" id="tambahMateri" tabindex="-1" aria-labelledby="tambahMateriLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="tambahAdminLabel">Buat Akun Baru</h1>
+                        <h1 class="modal-title fs-5" id="tambahMateriLabel">Buat Materi Baru</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('Administrator.store') }}" method="post">
-
+                        <form action="{{ route('materi.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
 
                             <div class="mb-3 form-floating">
-                                <input type="text" class="form-control" id="Addname" placeholder="Nama Lengkap"
-                                    name="name">
-                                <label for="name">Nama Lengkap</label>
-                            </div>
-                            {{-- <div class="mb-3 form-floating">
-                                <select name="posyandu_id" id="Addposyandu" class="form-select select2">
-                                    @forelse ($posyandu as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                    @empty
-                                        <option value="null">Data Posyandu Belum Di Import</option>
-                                    @endforelse
+                                <select class="form-select select2 text-uppercase fw-bold" id="menu"
+                                    aria-label="Pilih Menu" name="menu">
+                                    <option value="" disabled selected>Pilih Menu</option>
+                                    <option value="tb"> Tubercolosis </option>
+                                    <option value="batra"> Pengobatan Tradisional </option>
+                                    <option value="farmasi"> farmasi </option>
+                                    <option value="gigi"> gigi </option>
+                                    <option value="gizi"> gizi </option>
+                                    <option value="imunisasi"> imunisasi </option>
+                                    <option value="kb"> Keluarga Berencana </option>
+                                    <option value="kesling"> Kesehatan Lingkungan </option>
+                                    <option value="kia"> Kesehatan Ibu Dan Anak </option>
+                                    <option value="krr"> Kesehatan Reproduksi Remaja </option>
+                                    <option value="laboratorium"> laboratorium </option>
+                                    <option value="lansia"> Lanjut Usia </option>
+                                    <option value="promkes"> Promosi Kesehatan </option>
+                                    <option value="ptm"> Penyakit Tidak Menular </option>
                                 </select>
-                                <label for="name">Posyandu</label>
-                            </div> --}}
-                            <div class="mb-3 form-floating">
-                                <input type="email" class="form-control" id="Addemail" placeholder="Email"
-                                    name="email">
-                                <label for="email">Email address</label>
+                                <label for="menu">Pilih Menu</label>
                             </div>
                             <div class="mb-3 form-floating">
-                                <input type="text" class="form-control" id="Addpassword" placeholder="Password"
-                                    name="password">
-                                <label for="password">Password</label>
+                                <input type="text" class="form-control" name="cp" id="cp"
+                                    placeholder="contact person" />
+                                <label for="cp">contact person</label>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">File Materi</label>
+                                <input class="form-control" type="file" id="formFile" name="file_materi">
                             </div>
                             <div class="gap-2 d-grid ">
                                 <button class="btn btn-primary" type="submit">Simpan</button>
@@ -135,141 +78,163 @@
                 </div>
             </div>
         </div>
+
+
+
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Daftar admin</h4>
+                        <h4 class="header-title">Daftar Materi</h4>
                         <div class="tab-content">
                             <div class="tab-pane show active" id="fixed-header-preview">
                                 <table id="fixed-header-datatable" class="table table-striped dt-responsive nowrap w-100">
                                     <thead>
                                         <tr class="text-capitalize">
-                                            <th>nama</th>
-                                            <th>email</th>
-                                            {{-- <th>posyandu</th> --}}
+                                            <th>Menu</th>
+                                            <th>Materi</th>
+                                            <th>CP</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($admin as $item)
-                                            {{-- @dd($item->email) --}}
+                                        @foreach ($materi as $id => $item)
                                             <tr>
-                                                <td>{{ $item->name }}</td>
-                                                <td>{{ $item->email }}</td>
-                                                {{-- <td>{{ $item->posyandu_id == null ? 'Posyandu belum di pilih' : $item->posyandu->nama }} --}}
+                                                <td>{{ $item->menu }}</td>
+                                                <td><a href="#viewMateri-{{ $item->menu }}" data-bs-toggle="modal"
+                                                        data-bs-target="#viewMateri-{{ $item->menu }}">{{ $item->materi }}</a>
                                                 </td>
+                                                <td>{{ $item->cp }}</td>
                                                 <td>
-                                                    <form action="{{ route('Administrator.destroy', $item->uuid) }}"
-                                                        method="post">
-
+                                                    <a class="btn btn-primary btn-sm" href="#editMateri-{{ $item->id }}"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editMateri-{{ $item->id }}">Edit</a>
+                                                    <form action="{{ route('materi.destroy', $item->id) }}" method="POST"
+                                                        class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
-
-                                                        <a data-bs-toggle="modal" href="#userView-{{ $item->uuid }}">
-                                                            <span class="badge badge-lg rounded-pill text-bg-primary">
-                                                                <i class="mdi mdi-account"></i>
-                                                            </span>
-                                                        </a>
-                                                        <a data-bs-toggle="modal" href="#userEdit-{{ $item->uuid }}">
-
-                                                            <span class="badge badge-lg rounded-pill text-bg-warning">
-                                                                <i class="mdi mdi-account-edit"></i>
-                                                            </span>
-                                                        </a>
-                                                        <button class=" btn badge badge-lg rounded-pill text-bg-danger">
-                                                            <i class="mdi mdi-account-remove"></i>
-                                                        </button>
+                                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                                     </form>
                                                 </td>
                                             </tr>
-                                            {{-- detail User --}}
-                                            <div class="modal fade" id="userView-{{ $item->uuid }}" tabindex="-1"
-                                                aria-labelledby="userView-{{ $item->uuid }}Label" aria-hidden="true">
-                                                <div class="modal-dialog">
+                                            <!-- Modal View Materi -->
+                                            <div class="modal fade" id="viewMateri-{{ $item->menu }}" tabindex="-1"
+                                                aria-labelledby="viewMateri-{{ $item->menu }}Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h1 class="modal-title fs-5"
-                                                                id="userView-{{ $item->uuid }}Label">
-                                                                {{ $item->name }}
+                                                                id="viewMateri-{{ $item->menu }}Label">Lihat Materi
                                                             </h1>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <div class="mb-3 form-floating">
-                                                                <input type="text" class="form-control"
-                                                                    value="{{ $item->name }}" readonly>
-                                                                <label for="name">Nama Lengkap</label>
-                                                            </div>
-                                                            {{-- <div class="mb-3 form-floating">
-                                                                <input type="text" class="form-control"
-                                                                    value="{{ $item->posyandu_id == null ? 'Posyandu belum di pilih' : $item->posyandu->nama }}"
-                                                                    readonly>
-                                                                <label for="name">Posyandu</label>
-                                                            </div> --}}
-                                                            <div class="mb-3 form-floating">
-                                                                <input type="text" class="form-control"
-                                                                    value="{{ $item->email }}" readonly>
-                                                                <label for="email">Email address</label>
-                                                            </div>
+                                                            <iframe id="materiViewer" src="{{ url($item->materi) }}"
+                                                                frameborder="0"
+                                                                style="width: 100%; height: 500px;"></iframe>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- edit User --}}
-                                            <div class="modal fade" id="userEdit-{{ $item->uuid }}" tabindex="-1"
-                                                aria-labelledby="userEdit-{{ $item->uuid }}Label" aria-hidden="true">
+
+                                            {{-- model Edit materi --}}
+                                            <div class="modal fade" id="editMateri-{{ $item->id }}" tabindex="-1"
+                                                aria-labelledby="editMateri-{{ $item->id }}Label" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h1 class="modal-title fs-5"
-                                                                id="userEdit-{{ $item->uuid }}Label">Edit Akun
-                                                                {{ $item->name }}</h1>
+                                                                id="editMateri-{{ $item->id }}Label">Edit
+                                                                Materi</h1>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form
-                                                                action="{{ route('Administrator.update', $item->uuid) }}"
-                                                                method="post">
-
-                                                                @csrf
+                                                            <form action="{{ route('materi.update', $item->id) }}"
+                                                                method="post" enctype="multipart/form-data">
                                                                 @method('PUT')
+                                                                @csrf
 
+                                                                <div class="mb-3 form-floating">
+                                                                    <select
+                                                                        class="form-select select2 text-uppercase fw-bold"
+                                                                        id="menu" aria-label="Pilih Menu"
+                                                                        name="menu" aria-readonly="true">
+                                                                        <option value="" disabled selected>Pilih Menu
+                                                                        </option>
+                                                                        <option value="tb" aria-readonly=""
+                                                                            {{ $item->menu == 'tb' ? 'selected' : '' }}>
+                                                                            Tubercolosis
+                                                                        </option>
+                                                                        <option value="batra" aria-readonly=""
+                                                                            {{ $item->menu == 'batra' ? 'selected' : '' }}>
+                                                                            Pengobatan
+                                                                            Tradisional
+                                                                        </option>
+                                                                        <option value="farmasi" aria-readonly=""
+                                                                            {{ $item->menu == 'farmasi' ? 'selected' : '' }}>
+                                                                            farmasi </option>
+                                                                        <option value="gigi" aria-readonly=""
+                                                                            {{ $item->menu == 'gigi' ? 'selected' : '' }}>
+                                                                            gigi </option>
+                                                                        <option value="gizi" aria-readonly=""
+                                                                            {{ $item->menu == 'gizi' ? 'selected' : '' }}>
+                                                                            gizi </option>
+                                                                        <option value="imunisasi" aria-readonly=""
+                                                                            {{ $item->menu == 'imunisasi' ? 'selected' : '' }}>
+                                                                            imunisasi
+                                                                        </option>
+                                                                        <option value="kb" aria-readonly=""
+                                                                            {{ $item->menu == 'kb' ? 'selected' : '' }}>
+                                                                            Keluarga Berencana
+                                                                        </option>
+                                                                        <option value="kesling" aria-readonly=""
+                                                                            {{ $item->menu == 'kesling' ? 'selected' : '' }}>
+                                                                            Kesehatan
+                                                                            Lingkungan
+                                                                        </option>
+                                                                        <option value="kia" aria-readonly=""
+                                                                            {{ $item->menu == 'kia' ? 'selected' : '' }}>
+                                                                            Kesehatan Ibu Dan
+                                                                            Anak
+                                                                        </option>
+                                                                        <option value="krr" aria-readonly=""
+                                                                            {{ $item->menu == 'krr' ? 'selected' : '' }}>
+                                                                            Kesehatan
+                                                                            Reproduksi Remaja
+                                                                        </option>
+                                                                        <option value="laboratorium" aria-readonly=""
+                                                                            {{ $item->menu == 'laboratorium' ? 'selected' : '' }}>
+                                                                            laboratorium
+                                                                        </option>
+                                                                        <option value="lansia" aria-readonly=""
+                                                                            {{ $item->menu == 'lansia' ? 'selected' : '' }}>
+                                                                            Lanjut Usia
+                                                                        </option>
+                                                                        <option value="promkes" aria-readonly=""
+                                                                            {{ $item->menu == 'promkes' ? 'selected' : '' }}>
+                                                                            Promosi Kesehatan
+                                                                        </option>
+                                                                        <option value="ptm" aria-readonly=""
+                                                                            {{ $item->menu == 'ptm' ? 'selected' : '' }}>
+                                                                            Penyakit Tidak
+                                                                            Menular
+                                                                        </option>
+                                                                    </select>
+                                                                    <label for="menu">Pilih Menu</label>
+                                                                </div>
                                                                 <div class="mb-3 form-floating">
                                                                     <input type="text" class="form-control"
-                                                                        id="name" placeholder="Nama Lengkap"
-                                                                        name="name" value="{{ $item->name }}">
-                                                                    <label for="name">Nama Lengkap</label>
+                                                                        name="cp" id="cp"
+                                                                        placeholder="contact person" />
+                                                                    <label for="cp">contact person</label>
                                                                 </div>
-                                                                {{-- <div class="mb-3 form-floating">
-                                                                    <select name="posyandu_id" id="posyandu"
-                                                                        class="form-select">
-                                                                        <option value="0"
-                                                                            {{ $item->posyandu_id == null ? 'selected' : '' }}>
-                                                                            Posyandu Belum Di Pilih</option>
-                                                                        @forelse ($posyandu as $posyanduList)
-                                                                            <option value="{{ $posyanduList->id }}"
-                                                                                {{ $posyanduList->id == $item->posyandu_id ? 'selected' : '' }}>
-                                                                                {{ $posyanduList->nama }}</option>
-                                                                        @empty
-                                                                            <option>Data Posyandu Belum Di Import</option>
-                                                                        @endforelse
-                                                                    </select>
-                                                                    <label for="name">Posyandu</label>
-                                                                </div> --}}
-                                                                <div class="mb-3 form-floating">
-                                                                    <input type="email" class="form-control"
-                                                                        id="email" placeholder="Email" name="email"
-                                                                        value="{{ $item->email }}">
-                                                                    <label for="email">Email address</label>
-                                                                </div>
-                                                                <div class="mb-3 form-floating">
-                                                                    <input type="password" class="form-control"
-                                                                        id="password" placeholder="Password"
-                                                                        name="password" value="{{ $item->password }}">
-                                                                    <label for="password">Password</label>
+                                                                <div class="mb-3">
+                                                                    <label for="formFile" class="form-label">File
+                                                                        Materi</label>
+                                                                    <input class="form-control" type="file"
+                                                                        id="formFile" name="file_materi">
                                                                 </div>
                                                                 <div class="gap-2 d-grid ">
                                                                     <button class="btn btn-primary"
@@ -280,17 +245,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @empty
-                                            <tr>
-                                                <td colspan="4" class="text-center fw-bold">Null</td>
-                                            </tr>
-                                        @endforelse
+                                        @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr class="text-capitalize">
-                                            <th>nama</th>
-                                            <th>email</th>
-                                            {{-- <th>posyandu</th> --}}
+                                            <th>Menu</th>
+                                            <th>Materi</th>
+                                            <th>cp</th>
                                             <th>Actions</th>
                                         </tr>
                                     </tfoot>

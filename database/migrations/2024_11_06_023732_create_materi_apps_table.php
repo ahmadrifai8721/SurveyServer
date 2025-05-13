@@ -29,22 +29,31 @@ return new class extends Migration
         //   {'image': 'assets/images/batra.png', 'text': 'Batra'},
         // ]
 
+        // $table->json("kia");
+        // $table->json("kb");
+        // $table->json("gizi");
+        // $table->json("imunisasi");
+        // $table->json("kkr");
+        // $table->json("tb");
+        // $table->json("ptm");
+        // $table->json("lansia");
+        // $table->json("promkes");
+        // $table->json("kesling");
+        // $table->json("gigi");
+        // $table->json("laboratorium");
+        // $table->json("farmasi");
+        // $table->json("batra");
+
         Schema::create('materi_apps', function (Blueprint $table) {
             $table->id();
-            $table->json("kia");
-            $table->json("kb");
-            $table->json("gizi");
-            $table->json("imunisasi");
-            $table->json("kkr");
-            $table->json("tb");
-            $table->json("ptm");
-            $table->json("lansia");
-            $table->json("promkes");
-            $table->json("kesling");
-            $table->json("gigi");
-            $table->json("laboratorium");
-            $table->json("farmasi");
-            $table->json("batra");
+            $table->integer("index")->nullable();
+            $table->string("menu");
+            $table->longText("materi");
+            $table->json("materi_pic_list")->nullable();
+            $table->boolean("materi_pdf")->nullable();
+            $table->boolean("materi_vid")->nullable();
+            $table->string("cp")->nullable();
+            $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
             $table->timestamps();
         });
     }

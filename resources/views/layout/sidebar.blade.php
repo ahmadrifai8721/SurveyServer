@@ -92,7 +92,7 @@
                     <span> Administrator </span>
                 </a>
             </li>
-            {{--
+
             <li class="side-nav-title">Apps</li>
 
             {{-- <li class="side-nav-item">
@@ -101,12 +101,14 @@
                     <span> File APK </span>
                 </a>
             </li>
+
+            --}}
             <li class="side-nav-item">
                 <a href="{{ route('materi.index') }}" class="side-nav-link">
                     <i class=" uil-books"></i>
                     <span> material files / pdf files </span>
                 </a>
-            </li> --}}
+            </li>
 
             <!-- Help Box -->
             <div class="text-center text-white help-box">

@@ -175,8 +175,7 @@ Route::post('/clearBalita', function () {
     daftarBalita::truncate();
     DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     return back()->with("success", "Daftar Balita Berhasil di hapus");
-})
-    ->name("clearBalita")
+})->name("clearBalita")
     ->middleware("auth");
 Route::prefix("/admin")->middleware("auth")->group(
     function () {
@@ -202,6 +201,13 @@ Route::prefix("/admin")->middleware("auth")->group(
         });
     }
 );
+Route::prefix("/app")
+    ->middleware("authBasic")
+    ->group(
+        function () {
+            Route::get('materi', [MateriAppController::class, 'create'])->name("materiAPP");
+        }
+    );
 
 Route::get('privacy-policy', function () {
     return view("privacy-policy", [
