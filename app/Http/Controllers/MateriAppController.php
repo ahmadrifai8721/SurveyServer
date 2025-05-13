@@ -21,7 +21,8 @@ class MateriAppController extends Controller
             "pageTitle" => "Materi List",
             "materi" =>  MateriApp::all()
         ]);
-    }
+
+"materi_pdf" => $fileName,    }
 
     /**
      * Show the form for creating a new resource.
@@ -33,7 +34,7 @@ class MateriAppController extends Controller
         $data = [];
         foreach (MateriApp::all() as $key => $value) {
             $data[$value->menu] = [
-                "Materi_dir" => url($value->materi),
+                "Materi_dir" => url("/"),
                 "Materi_pic_list" => $value->materi_pic_list ? $value->materi_pic_list : [],
                 "Materi_pdf" => $value->materi_pdf,
                 "Materi_vid" => $value->materi_vid,
@@ -92,6 +93,7 @@ class MateriAppController extends Controller
                 ])->update([
                     "menu" => $request->menu,
                     "materi" => "storage/materi/" . $fileName,
+                    "materi_pdf" => $fileName,
                     "user_id" => auth()->user()->id
                 ]);
                 return redirect()->back()->with("success", "Berhasil mengupdate file materi");
@@ -107,6 +109,7 @@ class MateriAppController extends Controller
                 MateriApp::create([
                     "menu" => $request->menu,
                     "materi" => "storage/materi/" . $fileName,
+                    "materi_pdf" => $fileName,
                     "user_id" => auth()->user()->id
                 ]);
                 return redirect()->back()->with("success", "Berhasil mengupdate file materi");
@@ -169,6 +172,7 @@ class MateriAppController extends Controller
                 ])->update([
                     "menu" => $request->menu,
                     "materi" => "storage/materi/" . $fileName,
+                    "materi_pdf" => $fileName,
                     "user_id" => auth()->user()->id
                 ]);
                 return redirect()->back()->with("success", "Berhasil mengupdate file materi");
@@ -185,6 +189,7 @@ class MateriAppController extends Controller
                 ])->update([
                     "menu" => $request->menu,
                     "materi" => "storage/materi/" . $fileName,
+                    "materi_pdf" => $fileName,
                     "user_id" => auth()->user()->id
                 ]);
                 return redirect()->back()->with("success", "Berhasil mengupdate file materi");
