@@ -8,6 +8,7 @@ use App\Http\Controllers\FoodRecallController;
 use App\Http\Controllers\MateriAppController;
 use App\Http\Controllers\posyanduController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\TopInfoController;
 use App\Http\Controllers\UsersList;
 use App\Models\daftarBalita;
 use App\Models\foodRecall;
@@ -198,6 +199,7 @@ Route::prefix("/admin")->middleware("auth")->group(
 
         Route::prefix("app")->group(function () {
             Route::resource('materi', MateriAppController::class);
+            Route::resource('TopInfo', TopInfoController::class);
         });
     }
 );

@@ -104,6 +104,12 @@
 
             --}}
             <li class="side-nav-item">
+                <a href="{{ route('TopInfo.index') }}" class="side-nav-link">
+                    <i class=" uil-books"></i>
+                    <span> Top Info </span>
+                </a>
+            </li>
+            <li class="side-nav-item">
                 <a href="{{ route('materi.index') }}" class="side-nav-link">
                     <i class=" uil-books"></i>
                     <span> material files / pdf files </span>

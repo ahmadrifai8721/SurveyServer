@@ -5,6 +5,7 @@ use App\Models\foodRecall;
 use App\Models\Respondent;
 use App\Models\Survey;
 use App\Models\tableKomposisiPangan;
+use App\Models\TopInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -180,5 +181,21 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
                 "tanggal1" => date("Y-m-d", strtotime($request->tanggal))
             ]);
         })->name("foodRecallCetakAndro");
+    }
+);
+
+Route::get(
+    "/topinfo",
+    function () {
+        return TopInfo::all()->map(
+            function ($item) {
+                return [
+                    "id" => $item->id,
+                    "Images" => asset("storage/" . $item->Images),
+                    "Keterangan" => $item->Keterangan,
+                    "created_at" => $item->created_at->format("d-m-Y H:i:s")
+                ];
+            }
+        );
     }
 );
