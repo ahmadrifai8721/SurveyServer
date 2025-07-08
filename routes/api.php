@@ -190,8 +190,8 @@ Route::get(
         $data = TopInfo::all();
         $datanew = [];
         foreach ($data as $key => $value) {
-            $datanew["imageUrl"][$key] = asset("storage/" . $value->Images);
+            $datanew[$key]["imageUrl"] = asset("storage/" . $value->Images);
         }
-        return response()->json($datanew);
+        return response()->json($data);
     }
 );
