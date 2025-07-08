@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TopInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TopInfoController extends Controller
 {
@@ -33,6 +34,7 @@ class TopInfoController extends Controller
     public function store(Request $request)
     {
         //
+
         $fileUrl = $request->file('Image')->store('topinfo', 'public');
         TopInfo::create([
             'Images' => $fileUrl,
@@ -62,18 +64,27 @@ class TopInfoController extends Controller
      */
     public function update(Request $request, TopInfo $TopInfo)
     {
-        //
-        // return $TopInfo;
-        $fileUrl = $request->file('Image');
-        if (!$fileUrl) {
-            $fileUrl = $TopInfo->Images; // Keep the old image if no new file is uploaded
+        // Check if a new image is uploaded
+        $file = $request->file('Image');
+        $oldImage = $TopInfo->Images;
+
+        if ($file) {
+            // Delete the old image file if it exists
+            if ($oldImage && Storage::disk('public')->exists($oldImage)) {
+                Storage::disk('public')->delete($oldImage);
+            }
+            // Store the new image
+            $fileUrl = $file->store('topinfo', 'public');
         } else {
-            $fileUrl = $fileUrl->store('topinfo', 'public');
+            // Keep the old image if no new file is uploaded
+            $fileUrl = $oldImage;
         }
+
         $TopInfo->update([
             'Images' => $fileUrl,
             'Keterangan' => $request->input('Keterangan'),
         ]);
+
         return redirect()->back()->with("success", "Berhasil mengupdate Top Info");
     }
 
