@@ -190,10 +190,7 @@ Route::get(
         return TopInfo::all()->map(
             function ($item) {
                 return [
-                    "id" => $item->id,
-                    "Images" => asset("storage/" . $item->Images),
-                    "Keterangan" => $item->Keterangan,
-                    "created_at" => $item->created_at->format("d-m-Y H:i:s")
+                    "imageUrl" => asset("storage/" . $item->Images),
                 ];
             }
         );
