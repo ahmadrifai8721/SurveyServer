@@ -192,6 +192,6 @@ Route::get(
         foreach ($data as $key => $value) {
             $datanew[$key]["imageUrl"] = asset("storage/" . $value->Images);
         }
-        return response()->json($data);
+        return response()->json($datanew);
     }
 );
