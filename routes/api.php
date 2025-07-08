@@ -187,12 +187,11 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
 Route::get(
     "/topinfo",
     function () {
-        return TopInfo::all()->map(
-            function ($item) {
-                return [
-                    "imageUrl" => asset("storage/" . $item->Images),
-                ];
-            }
-        );
+        $data = TopInfo::all();
+        $datanew = [];
+        foreach ($data as $key => $value) {
+            $datanew["imageUrl"][$key] = asset("storage/" . $value->Images);
+        }
+        return response()->json($datanew);
     }
 );
