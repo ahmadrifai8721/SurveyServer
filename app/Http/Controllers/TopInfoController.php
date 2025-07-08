@@ -13,7 +13,7 @@ class TopInfoController extends Controller
     public function index()
     {
         //
-        return view('topinfo', [
+        return view('topInfo', [
             'TopInfo' => TopInfo::all(),
             'pageTitle' => 'Top Info',
         ]);
