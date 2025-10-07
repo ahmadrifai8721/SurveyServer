@@ -219,7 +219,7 @@ Route::post('Download/APK/{APK}', function (APK $APK) {
     // Increment download counter
     $APK->increment('download');
 
-    return response()->download(storage_path("app/public/{$APK->file_path}"));
+    return redirect()->to("storage/{$APK->file_path}");
 })->name('downloadAPK.go');
 Route::get('privacy-policy', function () {
     return view("privacy-policy", [
