@@ -23,7 +23,7 @@
             height: {{ $size }},
             type: "png",
             data: "{{ route('APK.show', $apk->id) }}",
-            image: "{{ asset('assets/images/bg-auth.JPG') }}",
+            image: "{{ asset('assets/images/bg-auth.jpg') }}",
             dotsOptions: {
                 // color: "#4267b2",
                 type: "rounded"
