@@ -6,7 +6,7 @@
         <div class="card shadow-lg border-0" style="max-width: 420px; width: 100%; border-radius: 1.5rem;">
             <div class="card-body text-center">
                 <div class="mb-4">
-                    <img src="{{ asset('assets/images/bg-auth.JPG') }}" alt="Kiss Bunda Logo" height="100px">
+                    <img src="{{ asset('assets/images/bg-auth.jpg') }}" alt="Kiss Bunda Logo" height="100px">
                 </div>
                 <h5 class="mb-3" style="color: #a259ec;">What's New</h5>
                 <p class="text-secondary mb-4">
