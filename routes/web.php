@@ -2,6 +2,7 @@
 
 use App\Exports\foodrecallExport;
 use App\Http\Controllers\Administrator;
+use App\Http\Controllers\APKController;
 use App\Http\Controllers\daftarBalitaController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\FoodRecallController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\posyanduController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\TopInfoController;
 use App\Http\Controllers\UsersList;
+use App\Models\APK;
 use App\Models\daftarBalita;
 use App\Models\foodRecall;
 use App\Models\User;
@@ -201,6 +203,8 @@ Route::prefix("/admin")->middleware("auth")->group(
             Route::resource('materi', MateriAppController::class);
             Route::resource('TopInfo', TopInfoController::class);
         });
+        Route::resource('APK', APKController::class);
+        Route::get('QRCode/{apk}/{size}', [APKController::class, 'generateQRCode'])->name('generateQRCode');
     }
 );
 Route::prefix("/app")
@@ -210,7 +214,13 @@ Route::prefix("/app")
             Route::get('materi', [MateriAppController::class, 'create'])->name("materiAPP");
         }
     );
+Route::get('Download/APK/{APK}', [APKController::class, 'show'])->name('downloadAPK');
+Route::post('Download/APK/{APK}', function (APK $APK) {
+    // Increment download counter
+    $APK->increment('download');
 
+    return response()->download(storage_path("app/public/{$APK->file_path}"));
+})->name('downloadAPK.go');
 Route::get('privacy-policy', function () {
     return view("privacy-policy", [
         "pageTitle" => "Privacy Policy"

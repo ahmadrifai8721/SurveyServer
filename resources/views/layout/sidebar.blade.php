@@ -95,14 +95,14 @@
 
             <li class="side-nav-title">Apps</li>
 
-            {{-- <li class="side-nav-item">
-                <a href="apps-file-manager.html" class="side-nav-link">
+            <li class="side-nav-item">
+                <a href="{{ route('APK.index') }}" class="side-nav-link">
                     <i class="uil-folder-plus"></i>
                     <span> File APK </span>
                 </a>
             </li>
 
-            --}}
+
             <li class="side-nav-item">
                 <a href="{{ route('TopInfo.index') }}" class="side-nav-link">
                     <i class=" uil-books"></i>

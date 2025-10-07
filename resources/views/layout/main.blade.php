@@ -98,7 +98,7 @@
         <script>
             console.log(html)
             Toast.fire({
-                icon: "success",
+                icon: "danger",
                 title: "<ul>" + html + "</ul>"
             });
         </script>
