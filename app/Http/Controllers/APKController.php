@@ -127,6 +127,8 @@ class APKController extends Controller
     public function destroy(APK $APK)
     {
         //
+        $APK->delete();
+        return redirect()->route('APK.index')->with('success', 'APK deleted successfully.');
     }
 
     public function generateQRCode(APK $apk, $size)
