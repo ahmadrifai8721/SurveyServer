@@ -45,7 +45,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($foodRecall as $result)
+                                        {{-- @forelse ($foodRecall as $result)
                                             <tr>
                                                 <td>{{ $result->daftarBalita->namaBalita }}</td>
                                                 <td>{{ $result->penyuluh->name }} <br> (
@@ -74,7 +74,7 @@
                                             <tr>
                                                 <td colspan="4">Data Masih Kosong</td>
                                             </tr>
-                                        @endforelse
+                                        @endforelse --}}
                                     </tbody>
                                     <tfoot>
                                         <tr>
@@ -114,7 +114,155 @@
     <script src="assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
 
     <!-- Datatable Demo Aapp js -->
-    <script src="assets/js/pages/demo.datatable-init.js"></script>
+    {{-- <script src="assets/js/pages/demo.datatable-init.js"></script> --}}
+    <script>
+        $(document).ready(function() {
+            "use strict";
+
+            var a = $("#datatable-buttons").DataTable({
+                processing: true,
+                serverSide: true,
+                responsive: true,
+                lengthChange: true,
+                lengthMenu: [
+                    [10, 25, 50, 100, ],
+                    [10, 25, 50, 100, ]
+                ],
+                ajax: {
+                    url: "http://127.0.0.1:8000/api/foodRecall/json",
+                    type: "GET",
+                    data: function(d) {
+                        d.uuid = "a133be8c-768e-4f38-af83-bdec0e98319b";
+                    }
+                },
+                columns: [{
+                        data: 'daftar_Balita_id',
+                        name: 'namaBalita1'
+                    },
+                    {
+                        data: 'petugas',
+                        name: 'petugas'
+                    },
+                    {
+                        data: 'tanggal',
+                        name: 'Tanggal'
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'actions',
+                        name: 'actions',
+                        orderable: false,
+                        searchable: false,
+                        defaultContent: ''
+                    }
+                ],
+                dom: 'Blfrtip',
+                buttons: [
+                    'copy',
+                    {
+                        extend: 'print',
+                        text: 'Print current data',
+                        title: document.title,
+                        exportOptions: {
+                            columns: ':visible:not(:last-child)'
+                        }
+                    },
+                    'excel',
+                    'pdf'
+                ],
+                language: {
+                    lengthMenu: "Tampilkan _MENU_ data per halaman",
+                    paginate: {
+                        previous: "<i class='mdi mdi-chevron-left'></i>",
+                        next: "<i class='mdi mdi-chevron-right'></i>"
+                    }
+                },
+                drawCallback: function() {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+                }
+            });
+
+            a.buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)"), $(
+                "#alternative-page-datatable").DataTable({
+                pagingType: "full_numbers",
+                drawCallback: function() {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
+                }
+            }), $("#scroll-vertical-datatable").DataTable({
+                scrollY: "350px",
+                scrollCollapse: !0,
+                paging: !1,
+                language: {
+                    paginate: {
+                        previous: "<i class='mdi mdi-chevron-left'>",
+                        next: "<i class='mdi mdi-chevron-right'>"
+                    }
+                },
+                drawCallback: function() {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
+                }
+            }), $("#scroll-horizontal-datatable").DataTable({
+                scrollX: !0,
+                language: {
+                    paginate: {
+                        previous: "<i class='mdi mdi-chevron-left'>",
+                        next: "<i class='mdi mdi-chevron-right'>"
+                    }
+                },
+                drawCallback: function() {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
+                }
+            }), $("#complex-header-datatable").DataTable({
+                language: {
+                    paginate: {
+                        previous: "<i class='mdi mdi-chevron-left'>",
+                        next: "<i class='mdi mdi-chevron-right'>"
+                    }
+                },
+                drawCallback: function() {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
+                },
+                columnDefs: [{
+                    visible: !1,
+                    targets: -1
+                }]
+            }), $("#row-callback-datatable").DataTable({
+                language: {
+                    paginate: {
+                        previous: "<i class='mdi mdi-chevron-left'>",
+                        next: "<i class='mdi mdi-chevron-right'>"
+                    }
+                },
+                drawCallback: function() {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
+                },
+                createdRow: function(a, e, t) {
+                    15e4 < +e[5].replace(/[\$,]/g, "") && $("td", a).eq(5).addClass("text-danger")
+                }
+            }), $("#state-saving-datatable").DataTable({
+                stateSave: !0,
+                language: {
+                    paginate: {
+                        previous: "<i class='mdi mdi-chevron-left'>",
+                        next: "<i class='mdi mdi-chevron-right'>"
+                    }
+                },
+                drawCallback: function() {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
+                }
+            }), $("#fixed-columns-datatable").DataTable({
+                scrollY: 300,
+                scrollX: !0,
+                scrollCollapse: !0,
+                paging: !1,
+                fixedColumns: !0
+            }), $(".dataTables_length select").addClass("form-select form-select-sm"), $(
+                ".dataTables_length label").addClass("form-label")
+        });
+    </script>
 @endsection
 
 </body>

@@ -13,9 +13,9 @@ class FoodRecallController extends Controller
     public function index()
     {
         //
+
         return view("foodRecall", [
             "pageTitle" => "Food Recal Report",
-            "foodRecall" => foodRecall::all()
         ]);
     }
 

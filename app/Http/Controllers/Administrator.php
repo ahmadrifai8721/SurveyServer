@@ -102,6 +102,7 @@ class Administrator extends Controller
     public function update(Request $request, User $server)
     {
         //
+        // dd($request->input());
         $server->update($request->input());
         return back()->with("success", "User $server->name Berhasil di Update");
     }

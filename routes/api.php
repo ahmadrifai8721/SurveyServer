@@ -158,7 +158,7 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
             // return $request->uuid;
             // dd(User::where("uuid", $request->uuid)->first()->admin);
             if (User::where("uuid", $request->uuid)->first()->admin) {
-                return view("foodR ecallAndro", [
+                return view("foodRecallAndro", [
                     "pageTitle" => "Food Recal Report Administratro",
                     "foodRecall" => foodRecall::all()->sortByDesc("created_at")
                 ]);
@@ -169,6 +169,86 @@ Route::prefix("foodRecall")->middleware("foodRecallMW")->group(
                     "foodRecall" => foodRecall::where("users_id", $request->uuid)->get()->sortByDesc("created_at")
                 ]);
             }
+        });
+        route::get("/json", function (Request $request) {
+            $draw = $request->input('draw');
+            $start = $request->input('start', 0);
+            $length = $request->input('length', 10);
+            $order = $request->input('order');
+            $search = $request->input('search');
+            $columns = $request->input('columns');
+
+            $user = User::where("uuid", $request->uuid)->first();
+            $query = foodRecall::with('daftarBalita', 'penyuluh');
+
+            if (!$user->admin) {
+                $query->where('food_recalls.users_id', $user->uuid);
+            }
+            // dd($search);
+            if (!empty($search['value'])) {
+                $searchValue = $search['value'];
+                $query->where(function ($q) use ($searchValue) {
+                    $q->where('food_recalls.id', 'like', "%{$searchValue}%")
+                        ->orWhere('daftar_balitas.namaBalita', 'like', "%{$searchValue}%")
+                        ->orWhere('food_recalls.tanggal', 'like', "%{$searchValue}%");
+                });
+            }
+            // dd($query->toSql());
+            $recordsTotal = $user->admin
+                ? foodRecall::count()
+                : foodRecall::where('users_id', $user->uuid)->count();
+
+            $recordsFiltered = $query->count();
+            // dd($query->get());
+            if (!empty($order) && !empty($columns)) {
+                $columnIndex = $order[0]['column'];
+                $columnName = $columns[$columnIndex]['data'];
+                $orderDirection = $order[0]['dir'];
+                // dd($columnName);
+                // dd($query->get());
+                $columnMap = [
+                    'id' => 'food_recalls.id',
+                    'daftar_balita_id' => 'daftar_balitas.ids',
+                    'petugas' => 'users_id',
+                    'tanggal' => 'food_recalls.tanggal',
+                    'created_at' => 'food_recalls.created_at'
+                ];
+                // dd($query->first());
+                // dd($columnMap);
+                $query->orderBy($columnMap[$columnName] ?? $columnName, $orderDirection);
+                // dd($query->get());
+            } else {
+                $query->orderBy('food_recalls.created_at', 'desc');
+            }
+            // dd($query->toSql());
+            $data = $query->skip($start)->take($length)->get()->map(function ($item) {
+                // dd($item);
+                return [
+                    'id' => $item->id,
+                    'daftar_Balita_id' => $item->daftarBalita->namaBalita,
+                    'petugas' => $item->penyuluh->name,
+                    'tanggal' => $item->tanggal,
+                    'created_at' => $item->created_at,
+                    'actions' => '
+                                <form action="' . route('foodRecall.destroy', $item->id) . '" method="POST" style="display:inline-block;">
+                                    ' . csrf_field() . method_field('DELETE') . '
+                                    <a href="' . route('foodRecallCetak', $item->daftarBalita->id) . '" class="btn btn-sm btn-info me-1">
+                                        Cetak
+                                    </a>
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm(\'Yakin ingin menghapus data ini?\')">
+                                        Hapus
+                                    </button>
+                                </form>
+                            '
+                ];
+            });
+
+            return response()->json([
+                "draw" => intval($draw),
+                "recordsTotal" => intval($recordsTotal),
+                "recordsFiltered" => intval($recordsFiltered),
+                "data" => $data
+            ]);
         });
         route::get("/cetak{daftarBalita}", function (daftarBalita $daftarBalita, Request $request) {
             // dd(date("d-m-Y", strtotime($request->tanggal)));
