@@ -137,11 +137,11 @@
                 },
                 columns: [{
                         data: 'daftar_Balita_id',
-                        name: 'namaBalita1'
+                        name: 'nama Balita'
                     },
                     {
                         data: 'petugas',
-                        name: 'petugas'
+                        name: 'Petugas'
                     },
                     {
                         data: 'tanggal',
