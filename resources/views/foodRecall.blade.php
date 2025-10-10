@@ -129,7 +129,7 @@
                     [10, 25, 50, 100, ]
                 ],
                 ajax: {
-                    url: "http://127.0.0.1:8000/api/foodRecall/json",
+                    url: "/api/foodRecall/json",
                     type: "GET",
                     data: function(d) {
                         d.uuid = "a133be8c-768e-4f38-af83-bdec0e98319b";
